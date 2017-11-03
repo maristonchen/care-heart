@@ -1,4 +1,4 @@
-package com.biocare.authority.service;
+package com.biocare.authority.service.base;
 
 import com.biocare.authority.bean.Template;
 import com.biocare.authority.query.TemplateQuery;

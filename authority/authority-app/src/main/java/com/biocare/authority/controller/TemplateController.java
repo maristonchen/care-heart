@@ -2,7 +2,7 @@ package com.biocare.authority.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.biocare.authority.bean.Template;
-import com.biocare.authority.service.TemplateService;
+import com.biocare.authority.service.base.TemplateService;
 import com.yhxd.tools.web.page.DTPage;
 import com.yhxd.tools.web.result.JsonResult;
 import org.springframework.stereotype.Controller;

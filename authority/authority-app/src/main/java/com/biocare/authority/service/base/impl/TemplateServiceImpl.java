@@ -1,10 +1,10 @@
-package com.biocare.authority.service.impl;
+package com.biocare.authority.service.base.impl;
 
 import com.biocare.account.api.IndividualInfoService;
 import com.biocare.authority.bean.Template;
 import com.biocare.authority.mapper.TemplateMapper;
 import com.biocare.authority.query.TemplateQuery;
-import com.biocare.authority.service.TemplateService;
+import com.biocare.authority.service.base.TemplateService;
 import com.github.pagehelper.PageHelper;
 import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import com.yhxd.tools.mybatis.service.AbstractBaseService;
