@@ -23,6 +23,10 @@
             <groupId>com.biocare</groupId>
             <artifactId>account-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.yhxd.soa</groupId>
+            <artifactId>mybatis-mapper</artifactId>
+        </dependency>
     </dependencies>
 
 

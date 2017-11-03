@@ -21,12 +21,14 @@
             <list>
                 <value>file:${user.dir}/conf/authority/jdbc.properties</value>
                 <value>file:${user.dir}/conf/authority/dubbo.properties</value>
-                <value>file:${user.dir}/conf/authority/jdbc.properties</value>
+                <value>file:${user.dir}/conf/authority/redis.properties</value>
+                <value>file:${user.dir}/conf/authority/authority.properties</value>
             </list>
         </property>
     </bean>
 
     <import resource="classpath:spring/spring-mybatis.xml"/>
-    <import resource="classpath:spring/spring-quartz.xml"/>
     <import resource="classpath:spring/dubbo-consumer.xml"/>
+    <!--<import resource="classpath:spring/spring-redis.xml"/>-->
+    <import resource="classpath:spring/spring-quartz.xml"/>
 </beans>

@@ -9,11 +9,10 @@
 
 	<dubbo:registry address="${dubbo.registry.address}" />
 
-	<dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}" />
+	<dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}" serialization="kryo" optimizer="com.biocare.common.dubbo.SerializationOptimizerImpl"/>
 
 	<dubbo:reference id="registryService" interface="com.alibaba.dubbo.registry.RegistryService" />
 	
-	<!--<dubbo:reference id="insuranceApi" interface="com.mariston.dubbo.api.InsuranceApi" check="false"/>-->
-
+	<dubbo:reference id="individualInfoService" interface="com.biocare.account.api.IndividualInfoService" check="false"/>
 
 </beans>

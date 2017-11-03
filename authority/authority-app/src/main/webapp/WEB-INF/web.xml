@@ -11,7 +11,7 @@
 
     <context-param>
         <param-name>log4jConfigLocation</param-name>
-        <param-value>file:${user.dir}/conf/soa/log4j.properties</param-value>
+        <param-value>file:${user.dir}/conf/authority/log4j.properties</param-value>
     </context-param>
 
     <listener>

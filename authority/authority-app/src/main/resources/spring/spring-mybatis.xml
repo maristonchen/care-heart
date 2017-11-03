@@ -44,18 +44,18 @@
     <!-- 创建SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:com/yhxd/soa/mapper/mapping/*.xml"/>
+        <property name="mapperLocations" value="classpath:com/biocare/authority/mapper/mapping/*.xml"/>
         <property name="configLocation" value="classpath:/spring/mybatis-config.xml"/>
     </bean>
 
     <!-- 自动扫描映射器,接口mapper -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <property name="basePackage" value="com.yhxd.soa.mapper"/>
+        <property name="basePackage" value="com.biocare.authority.mapper"/>
         <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
     </bean>
 
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:annotation-driven/>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>

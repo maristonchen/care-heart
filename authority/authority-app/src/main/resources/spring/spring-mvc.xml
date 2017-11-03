@@ -87,7 +87,7 @@
               p:viewClass="org.springframework.web.servlet.view.JstlView"/>-->
 
     <!-- 全局异常解析器 -->
-    <bean id="exceptionResolver" class="com.biocare.authority.exception.GlobalExceptionResolver"/>
+    <bean id="exceptionResolver" class="com.biocare.common.exception.GlobalExceptionResolver"/>
 
     <!-- 配置springMVC处理上传文件的信息 -->
     <!--   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

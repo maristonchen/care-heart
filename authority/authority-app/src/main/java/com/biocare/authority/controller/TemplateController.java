@@ -1,10 +1,6 @@
 package com.biocare.authority.controller;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.fastjson.JSON;
 import com.biocare.authority.bean.Template;
 import com.biocare.authority.service.TemplateService;
 import com.yhxd.tools.web.page.DTPage;
@@ -15,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSON;
-
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -36,56 +32,59 @@ public class TemplateController {
     @Resource
     private TemplateService templateService;
 
-    
-	/**
-	 * 转向显示页面
-	 * @return
-	 */
-	@RequestMapping("listPage")
-	public ModelAndView page(ModelAndView mv){
-		mv.setViewName("main/generator/template/listPage");
-		return mv;
-	}
-	
-	/**
-	 * 新增(Selective)
-	 * @param request
-	 * @param jsonParam
-	 * @return
-	 */
-	@RequestMapping(value="insert",method=RequestMethod.POST)
-	@ResponseBody
-	public JsonResult insert(HttpServletRequest request,String jsonParam){
-		templateService.saveSelective(JSON.parseObject(jsonParam,Template.class));
-		return new JsonResult(200, "写入成功");
-	}
-	
-	/**
-	 * 删除(根据主键)
-	 * @param request
-	 * @param jsonParam
-	 * @return
-	 */
-	@RequestMapping(value="delete",method=RequestMethod.POST)
-	@ResponseBody
-	public JsonResult delete(HttpServletRequest request,String jsonParam){
-		templateService.removeById(JSON.parseObject(jsonParam,Template.class).getId());
-		return new JsonResult(200, "删除成功");
-	}
 
-	/**
-	 * 更新(根据主键)
-	 * @param request
-	 * @param jsonParam
-	 * @return
-	 */
-	@RequestMapping(value="update",method=RequestMethod.POST)
-	@ResponseBody
-	public JsonResult update(HttpServletRequest request,String jsonParam){
-		templateService.modifyById(JSON.parseObject(jsonParam,Template.class).getId());
-		return new JsonResult(200, "更新成功");
-	}
-	
+    /**
+     * 转向显示页面
+     *
+     * @return
+     */
+    @RequestMapping("listPage")
+    public ModelAndView page(ModelAndView mv) {
+        mv.setViewName("main/generator/template/listPage");
+        return mv;
+    }
+
+    /**
+     * 新增(Selective)
+     *
+     * @param request
+     * @param jsonParam
+     * @return
+     */
+    @RequestMapping(value = "insert", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult insert(HttpServletRequest request, String jsonParam) {
+        templateService.saveSelective(JSON.parseObject(jsonParam, Template.class));
+        return new JsonResult(200, "写入成功");
+    }
+
+    /**
+     * 删除(根据主键)
+     *
+     * @param request
+     * @param jsonParam
+     * @return
+     */
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult delete(HttpServletRequest request, String jsonParam) {
+        templateService.removeById(JSON.parseObject(jsonParam, Template.class).getId());
+        return new JsonResult(200, "删除成功");
+    }
+
+    /**
+     * 更新(根据主键)
+     *
+     * @param request
+     * @param jsonParam
+     * @return
+     */
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult update(HttpServletRequest request, String jsonParam) {
+        return new JsonResult(200, "更新成功");
+    }
+
     /**
      * 分页查询列表
      *
@@ -95,9 +94,9 @@ public class TemplateController {
     @RequestMapping(value = "/queryByPage", produces = {"text/html;charset=utf-8"})
     @ResponseBody
     public String queryByPage(DTPage<Template> page) {
-            //分页查询
-            templateService.queryByPage(page);
+        //分页查询
+        templateService.queryByPage(page);
 
-            return page.toString();
+        return page.toString();
     }
 }

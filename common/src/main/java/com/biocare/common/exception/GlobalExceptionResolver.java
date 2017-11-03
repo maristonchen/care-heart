@@ -1,4 +1,4 @@
-package com.biocare.authority.exception;
+package com.biocare.common.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

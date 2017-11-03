@@ -25,6 +25,11 @@
             <artifactId>fastjson</artifactId>
         </dependency>
         <!-- fastjson end -->
+        <dependency>
+            <groupId>com.yhxd.soa</groupId>
+            <artifactId>mybatis-mapper</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     
 </project>

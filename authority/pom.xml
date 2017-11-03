@@ -25,6 +25,12 @@
                 <groupId>com.biocare</groupId>
                 <artifactId>common</artifactId>
                 <version>1.0-SNAPSHOT</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.yhxd.soa</groupId>
+                        <artifactId>mybatis-mapper</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.biocare</groupId>
@@ -34,6 +40,10 @@
                     <exclusion>
                         <groupId>com.biocare</groupId>
                         <artifactId>common</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.yhxd.soa</groupId>
+                        <artifactId>mybatis-mapper</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
