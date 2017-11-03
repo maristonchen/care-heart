@@ -12,10 +12,29 @@
 
     <artifactId>platform</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>platform-api</module>
+        <module>platform-app</module>
+    </modules>
 
     <properties>
         <skip-maven-deploy>true</skip-maven-deploy>
     </properties>
-    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.biocare</groupId>
+                <artifactId>common</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.yhxd.soa</groupId>
+                        <artifactId>mybatis-mapper</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
