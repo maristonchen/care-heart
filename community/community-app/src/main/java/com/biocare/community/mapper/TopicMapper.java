@@ -1,7 +1,7 @@
 package com.biocare.community.mapper;
 
-import com.biocare.account.bean.Individual;
-import com.biocare.account.query.IndividualQuery;
+import com.biocare.community.bean.Topic;
+import com.biocare.community.query.TopicQuery;
 import com.yhxd.tools.mybatis.annotations.Meta;
 import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Meta(tableName = "template", keyProperty = "id")
-public interface TopicMapper extends BaseMapper<Individual, IndividualQuery> {
+public interface TopicMapper extends BaseMapper<Topic, TopicQuery> {
 
 
 }

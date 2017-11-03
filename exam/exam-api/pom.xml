@@ -10,9 +10,25 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.biocare</groupId>
     <artifactId>exam-api</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${parent.version}</version>
+    <packaging>jar</packaging>
 
-    
+    <dependencies>
+        <dependency>
+            <groupId>com.biocare</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+        <!-- fastjson begin -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <!-- fastjson end -->
+        <dependency>
+            <groupId>com.yhxd.soa</groupId>
+            <artifactId>mybatis-mapper</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>
