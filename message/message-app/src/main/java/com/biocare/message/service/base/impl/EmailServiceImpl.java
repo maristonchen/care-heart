@@ -1,0 +1,29 @@
+package com.biocare.message.service.base.impl;
+
+import com.biocare.message.bean.Email;
+import com.biocare.message.query.EmailQuery;
+import com.biocare.message.service.base.EmailService;
+import com.yhxd.tools.mybatis.mapper.BaseMapper;
+import com.yhxd.tools.mybatis.service.AbstractBaseService;
+import org.springframework.stereotype.Service;
+
+/**
+ * please descripe this java file
+ *
+ * @author mariston
+ * @version 1.0
+ * @since 2017/11/6 18:02
+ */
+@Service("emailService")
+public class EmailServiceImpl extends AbstractBaseService<Email, EmailQuery> implements EmailService {
+
+    /**
+     * 获取mapper方法
+     *
+     * @return {@link BaseMapper}
+     */
+    @Override
+    protected BaseMapper<Email, EmailQuery> getMapper() {
+        return null;
+    }
+}

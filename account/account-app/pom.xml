@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>account-app</artifactId>
-    <version>${parent.version}</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <properties>
@@ -39,7 +39,7 @@
         <dependency>
             <groupId>com.biocare</groupId>
             <artifactId>account-api</artifactId>
-            <version>${parent.version}</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- spring begin ! -->
         <dependency>

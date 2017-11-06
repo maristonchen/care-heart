@@ -39,7 +39,7 @@
         <dependency>
             <groupId>com.biocare</groupId>
             <artifactId>shop-api</artifactId>
-            <version>${parent.version}</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- spring begin ! -->
         <dependency>
