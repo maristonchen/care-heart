@@ -38,7 +38,7 @@
         <spring-version>4.3.10.RELEASE</spring-version>
         <spring-security-version>4.2.3.RELEASE</spring-security-version>
         <fastjson-version>1.2.39</fastjson-version>
-        <mybatis-verison>3.4.4</mybatis-verison>
+        <mybatis-verison>3.4.5</mybatis-verison>
         <oracle-version>12.1.0.2</oracle-version>
         <mysql-version>5.1.6</mysql-version>
         <commons-io-version>2.4</commons-io-version>
@@ -64,7 +64,7 @@
             <dependency>
                 <groupId>com.yhxd.soa</groupId>
                 <artifactId>mybatis-mapper</artifactId>
-                <version>1.0-RELEASE</version>
+                <version>1.1-RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>com.yhxd.soa</groupId>
