@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 哨兵配置 -->
+    <bean id="sentinelConfiguration" class="org.springframework.data.redis.connection.RedisSentinelConfiguration">
+        <property name="master">
+            <bean class="org.springframework.data.redis.connection.RedisNode">
+                <property name="name" value="${redis.master.id}"/>
+            </bean>
+        </property>
+        <property name="sentinels">
+            <list>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.sentinel.one.host}"/>
+                    <constructor-arg name="port" value="${redis.sentinel.one.port}"/>
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.sentinel.two.host}"/>
+                    <constructor-arg name="port" value="${redis.sentinel.two.port}"/>
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.sentinel.three.host}"/>
+                    <constructor-arg name="port" value="${redis.sentinel.three.port}"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- 链接池配置 -->
+    <bean id="poolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
+        <property name="maxTotal" value="20"/>
+        <property name="maxIdle" value="20"/>
+        <property name="minIdle" value="5"/>
+    </bean>
+
+    <!-- redis lettuce pool -->
+    <bean id="defaultLettucePool" class="org.springframework.data.redis.connection.lettuce.DefaultLettucePool">
+        <constructor-arg name="sentinelConfiguration" ref="sentinelConfiguration"/>
+        <property name="poolConfig" ref="poolConfig"/>
+        <property name="password" value="${redis.password}"/>
+    </bean>
+
+    <!-- redis api -->
+ <!--   <bean id="redisClient" class="com.biocare.redis.util.RedisClient">
+        <property name="defaultLettucePool" ref="defaultLettucePool"/>
+    </bean>-->
+
+</beans>

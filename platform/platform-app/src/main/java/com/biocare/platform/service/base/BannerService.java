@@ -5,7 +5,7 @@ import com.biocare.platform.query.BannerQuery;
 import com.yhxd.tools.mybatis.service.BaseService;
 
 /**
- * please descripe this java file
+ *  the banner service interface
  *
  * @author mariston
  * @version 1.0

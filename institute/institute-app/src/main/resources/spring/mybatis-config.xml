@@ -45,8 +45,8 @@
 
     <!-- 别名定义 -->
     <typeAliases>
-         <package name="com.biocare.platform.query"/>
-        <package name="com.biocare.platform.bean"/>
+         <package name="com.biocare.institute.query"/>
+        <package name="com.biocare.institute.bean"/>
     </typeAliases>
 
     <!--自定义类型处理器 -->

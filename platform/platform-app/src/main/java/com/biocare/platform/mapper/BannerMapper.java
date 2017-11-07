@@ -10,10 +10,11 @@ import org.springframework.stereotype.Repository;
  * 模板MAPPER
  *
  * @author mariston
+ * @version 1.0
  * @since 2017/08/14
  */
 @Repository
-@Meta(tableName = "template", keyProperty = "id")
+@Meta(tableName = "t_banner_info", keyProperty = "id")
 public interface BannerMapper extends BaseMapper<Banner, BannerQuery> {
 
 

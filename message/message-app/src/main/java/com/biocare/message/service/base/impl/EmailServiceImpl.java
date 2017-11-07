@@ -1,11 +1,14 @@
 package com.biocare.message.service.base.impl;
 
 import com.biocare.message.bean.Email;
+import com.biocare.message.mapper.EmailMapper;
 import com.biocare.message.query.EmailQuery;
 import com.biocare.message.service.base.EmailService;
 import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import com.yhxd.tools.mybatis.service.AbstractBaseService;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * please descripe this java file
@@ -18,12 +21,18 @@ import org.springframework.stereotype.Service;
 public class EmailServiceImpl extends AbstractBaseService<Email, EmailQuery> implements EmailService {
 
     /**
+     * email mapper
+     */
+    @Resource
+    private EmailMapper emailMapper;
+
+    /**
      * 获取mapper方法
      *
      * @return {@link BaseMapper}
      */
     @Override
     protected BaseMapper<Email, EmailQuery> getMapper() {
-        return null;
+        return this.emailMapper;
     }
 }
