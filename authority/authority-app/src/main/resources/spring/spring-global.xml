@@ -28,7 +28,8 @@
     </bean>
 
     <import resource="classpath:spring/spring-mybatis.xml"/>
-    <import resource="classpath:spring/dubbo-consumer.xml"/>
+  <!--  <import resource="classpath:spring/dubbo-consumer.xml"/>-->
     <!--<import resource="classpath:spring/spring-redis.xml"/>-->
     <import resource="classpath:spring/spring-quartz.xml"/>
+    <import resource="classpath:spring/spring-security-cas.xml"/>
 </beans>
