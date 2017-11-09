@@ -7,13 +7,13 @@ import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
 /**
- * 模板MAPPER
+ * individual mapper
  *
  * @author mariston
  * @since 2017/08/14
  */
 @Repository
-@Meta(tableName = "template", keyProperty = "id")
+@Meta(tableName = "t_individual_info", keyProperty = "individualId")
 public interface IndividualMapper extends BaseMapper<Individual, IndividualQuery> {
 
 
