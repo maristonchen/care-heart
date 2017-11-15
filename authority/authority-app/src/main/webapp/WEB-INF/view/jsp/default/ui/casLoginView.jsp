@@ -75,7 +75,7 @@
                         </div>
                     </div>
 
-                    <c:if test="${not empty count && count >= 0}">
+                   <%-- <c:if test="${not empty count && count >= 0}">--%>
                         <div class="verify">
                             <div class="verify_box">
                                 <spring:message code="screen.welcome.label.captcha.accesskey" var="authcaptchaAccessKey" />
@@ -87,7 +87,7 @@
                                      onclick="this.src='captcha.jpg?'+Math.random()" src="captcha.jpg">
                             </div>
                         </div>
-                    </c:if>
+                   <%-- </c:if>--%>
 
                     <a href="#"><button class="button" type="submit">立即登录</button></a>
                     <form:errors path="*" id="msg" cssClass="alert_tip" element="div" htmlEscape="false"/>
