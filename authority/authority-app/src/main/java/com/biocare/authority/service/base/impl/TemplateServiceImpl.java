@@ -1,6 +1,6 @@
 package com.biocare.authority.service.base.impl;
 
-import com.biocare.account.api.IndividualInfoService;
+import com.biocare.account.api.IndividualDTOService;
 import com.biocare.authority.bean.Template;
 import com.biocare.authority.mapper.TemplateMapper;
 import com.biocare.authority.query.TemplateQuery;
@@ -23,8 +23,6 @@ public class TemplateServiceImpl extends AbstractBaseService<Template, TemplateQ
     @Resource
     private TemplateMapper templateMapper;
 
-    @Resource
-    private IndividualInfoService individualInfoService;
 
     @Override
     protected BaseMapper<Template, TemplateQuery> getMapper() {
@@ -51,7 +49,6 @@ public class TemplateServiceImpl extends AbstractBaseService<Template, TemplateQ
 
     @Override
     public List<Template> queryByLike(TemplateQuery query) {
-        individualInfoService.query("");
         return this.templateMapper.selectByLike(query);
     }
 
