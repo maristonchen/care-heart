@@ -7,5 +7,5 @@ package com.biocare.message.api;
  * @version 1.0
  * @since 2017/11/6 17:12
  */
-public interface SystemInfoService {
+public interface InformationInfoService {
 }
