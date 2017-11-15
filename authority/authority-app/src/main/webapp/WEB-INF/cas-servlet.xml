@@ -308,6 +308,15 @@
 
   <!--<bean id="authenticationExceptionHandler" class="org.jasig.cas.web.flow.AuthenticationExceptionHandler" />-->
 
+  <!-- 自定义验证码校验的CaptchaVaditeAuthenticationViaFormAction -->
+  <bean id="authenticationViaFormAction" class="org.jasig.cas.web.flow.CaptchaVaditeAuthenticationViaFormAction"
+        p:centralAuthenticationService-ref="centralAuthenticationService"
+        p:warnCookieGenerator-ref="warnCookieGenerator"/>
+
+  <!-- 自定义异常处理Handler 统计错误次数 -->
+  <bean id="authenticationExceptionHandler" class="org.jasig.cas.web.flow.MyAuthenticationExceptionHandler"/>
+
+
   <bean id="generateServiceTicketAction" class="org.jasig.cas.web.flow.GenerateServiceTicketAction"
         p:centralAuthenticationService-ref="centralAuthenticationService"/>
 
@@ -352,14 +361,6 @@
           p:failureView="casSamlServiceFailureView"/>
   -->
 
-  <!-- 自定义验证码校验的CaptchaVaditeAuthenticationViaFormAction -->
-  <bean id="authenticationViaFormAction" class="org.jasig.cas.web.flow.CaptchaVaditeAuthenticationViaFormAction"
-        p:centralAuthenticationService-ref="centralAuthenticationService"
-        p:warnCookieGenerator-ref="warnCookieGenerator"
-        p:ticketRegistry-ref="ticketRegistry"/>
-
-  <!-- 自定义异常处理Handler 统计错误次数 -->
-  <bean id="authenticationExceptionHandler" class="org.jasig.cas.web.flow.MyAuthenticationExceptionHandler"/>
 
 
 </beans>
