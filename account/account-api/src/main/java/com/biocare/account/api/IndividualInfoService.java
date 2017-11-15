@@ -1,6 +1,6 @@
 package com.biocare.account.api;
 
-import com.biocare.account.bean.Individual;
+import com.biocare.account.dto.IndividualInfo;
 
 /**
  * please descripe this java file
@@ -15,7 +15,7 @@ public interface IndividualInfoService {
      * query  Individual info by  his phone
      *
      * @param phone phone num
-     * @return
+     * @return {@link IndividualInfo}
      */
-    Individual query(String phone);
+    IndividualInfo query(String phone);
 }
