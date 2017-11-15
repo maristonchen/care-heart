@@ -314,4 +314,7 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
+    <!--集群配置支持-->
+    <distributable/>
+
 </web-app>
