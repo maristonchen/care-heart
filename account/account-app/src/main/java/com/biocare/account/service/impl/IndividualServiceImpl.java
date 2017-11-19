@@ -1,9 +1,9 @@
-package com.biocare.account.service.base.impl;
+package com.biocare.account.service.impl;
 
 import com.biocare.account.bean.Individual;
 import com.biocare.account.mapper.IndividualMapper;
 import com.biocare.account.query.IndividualQuery;
-import com.biocare.account.service.base.IndividualService;
+import com.biocare.account.service.IndividualService;
 import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import com.yhxd.tools.mybatis.service.AbstractBaseService;
 import org.springframework.stereotype.Service;

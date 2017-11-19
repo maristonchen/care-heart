@@ -1,4 +1,4 @@
-package com.biocare.community.service.base;
+package com.biocare.community.service;
 
 /**
  * please descripe this java file

@@ -1,6 +1,6 @@
-package com.biocare.community.service.base.impl;
+package com.biocare.community.service.impl;
 
-import com.biocare.community.service.base.TopicService;
+import com.biocare.community.service.TopicService;
 import org.springframework.stereotype.Service;
 
 /**

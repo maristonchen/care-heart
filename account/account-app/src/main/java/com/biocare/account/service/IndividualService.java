@@ -1,4 +1,4 @@
-package com.biocare.account.service.base;
+package com.biocare.account.service;
 
 import com.biocare.account.bean.Individual;
 import com.biocare.account.query.IndividualQuery;

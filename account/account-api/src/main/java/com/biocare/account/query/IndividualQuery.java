@@ -10,4 +10,5 @@ import com.yhxd.tools.mybatis.query.BaseQuery;
  * @since 2017/11/2 17:11
  */
 public class IndividualQuery extends BaseQuery {
+
 }

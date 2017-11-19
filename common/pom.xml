@@ -41,6 +41,10 @@
             <artifactId>spring-webmvc</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.yhxd.soa</groupId>
+            <artifactId>base-tools</artifactId>
+        </dependency>
     </dependencies>
     
 </project>

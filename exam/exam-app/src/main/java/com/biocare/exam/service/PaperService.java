@@ -1,4 +1,4 @@
-package com.biocare.exam.service.base;
+package com.biocare.exam.service;
 
 import com.biocare.exam.bean.Paper;
 import com.biocare.exam.query.PaperQuery;

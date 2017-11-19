@@ -1,8 +1,8 @@
-package com.biocare.exam.service.base.impl;
+package com.biocare.exam.service.impl;
 
 import com.biocare.exam.bean.Paper;
 import com.biocare.exam.query.PaperQuery;
-import com.biocare.exam.service.base.PaperService;
+import com.biocare.exam.service.PaperService;
 import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import com.yhxd.tools.mybatis.service.AbstractBaseService;
 

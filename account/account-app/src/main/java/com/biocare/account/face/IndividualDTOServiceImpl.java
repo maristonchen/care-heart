@@ -4,7 +4,7 @@ import com.biocare.account.api.IndividualDTOService;
 import com.biocare.account.bean.Individual;
 import com.biocare.account.dto.IndividualDTO;
 import com.biocare.account.query.IndividualQuery;
-import com.biocare.account.service.base.IndividualService;
+import com.biocare.account.service.IndividualService;
 import com.yhxd.tools.base.collection.CollectionUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
