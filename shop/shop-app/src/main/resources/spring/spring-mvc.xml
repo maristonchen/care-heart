@@ -86,6 +86,22 @@
               p:prefix="/WEB-INF/pages/" p:suffix=".jsp"
               p:viewClass="org.springframework.web.servlet.view.JstlView"/>-->
 
+
+    <!-- 配置freeMarker的模板路径 -->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="WEB-INF/ftl/" />
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+    <!-- freemarker视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="suffix" value=".ftl" />
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <!-- 此变量值为pageContext.request, 页面使用方法：rc.contextPath -->
+        <property name="requestContextAttribute" value="rc" />
+    </bean>
+
+
+
     <!-- 全局异常解析器 -->
     <bean id="exceptionResolver" class="com.biocare.common.exception.GlobalExceptionResolver"/>
 
