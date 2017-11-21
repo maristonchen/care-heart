@@ -19,6 +19,19 @@
             <groupId>com.yhxd.soa</groupId>
             <artifactId>mybatis-mapper</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.biocare</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yhxd.soa</groupId>
+            <artifactId>base-tools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     
 </project>

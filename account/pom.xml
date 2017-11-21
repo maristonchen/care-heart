@@ -13,6 +13,7 @@
     <artifactId>account</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <description>account system</description>
 
     <modules>
         <module>account-api</module>
