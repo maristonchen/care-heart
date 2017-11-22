@@ -1,5 +1,7 @@
 package com.biocare.common.exception;
 
+import com.biocare.common.bean.ResponseWrapper;
+import com.biocare.common.em.GlobalErrorCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
@@ -57,13 +59,12 @@ public class GlobalExceptionResolver extends SimpleMappingExceptionResolver {
         } else {// JSON格式返回
             try {
                 PrintWriter writer = response.getWriter();
-                String message;
-                //TODO 这里可以添加自定义异常
-                message = ex.getMessage();
-                writer.write(message);
+                BioException be = ex instanceof BioException ? (BioException) ex : BioException.create(GlobalErrorCode.FAIL);
+                ResponseWrapper wrapper = ResponseWrapper.create(be);
+                writer.write(wrapper.toString());
                 writer.flush();
                 writer.close();
-                logger.debug("======JSON格式返回：{}", message);
+                logger.debug("======JSON格式返回：{}", wrapper);
             } catch (IOException e) {
                 logger.error("====JSON格式返回异常", e);
             }

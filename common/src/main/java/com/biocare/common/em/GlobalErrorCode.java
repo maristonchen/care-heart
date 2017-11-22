@@ -12,6 +12,8 @@ import com.yhxd.tools.base.string.StringUtil;
  */
 public enum GlobalErrorCode implements ErrorCode {
     SUCCESS("000000", "the operation is successful"),
+    OBJECT_PARAM_NULL("900001", "the object is null"),
+    STRING_PARAM_EMPTY("900002", "the string is empty"),
     FAIL("999999", "the operation is failed");
 
     /**
@@ -55,7 +57,7 @@ public enum GlobalErrorCode implements ErrorCode {
      */
     @Override
     public void check() {
-        if ((BigDecimalUtil.compareTo(this.getCode(), "900000") < 0 || BigDecimalUtil.compareTo(this.getCode(), "999999") > 0)
+        if ((BigDecimalUtil.compareTo(this.getCode(), "900001") < 0 || BigDecimalUtil.compareTo(this.getCode(), "999999") > 0)
                 && BigDecimalUtil.compareTo(this.getCode(), "000000") != 0) {
             throw new IllegalStateException("the error code is out of range ,it is " + this.name() + "[" + this.code + "]");
         }

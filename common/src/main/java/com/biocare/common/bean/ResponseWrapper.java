@@ -1,6 +1,8 @@
 package com.biocare.common.bean;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.biocare.common.exception.BioException;
 import com.yhxd.tools.base.encrypt.MD5;
 import com.yhxd.tools.base.string.StringUtil;
 import org.springframework.util.Assert;
@@ -42,9 +44,12 @@ public class ResponseWrapper implements Serializable {
         this.msg = msg;
     }
 
+    public static ResponseWrapper create(BioException e) {
+        return create(e.getErrorCode().getCode(), e.getErrorCode().getMsg());
+    }
+
     public static ResponseWrapper create(String code, String msg) {
         return create(code, msg, null);
-
     }
 
     public static ResponseWrapper create(String code, String msg, Object param) {
@@ -64,5 +69,10 @@ public class ResponseWrapper implements Serializable {
     public String getResult() {
         Assert.isTrue(StringUtil.equals(this.sign, MD5.md5(this.result)), "the result is mismatch");
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this, SerializerFeature.WriteMapNullValue);
     }
 }
