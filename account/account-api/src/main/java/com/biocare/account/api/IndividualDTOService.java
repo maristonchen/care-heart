@@ -1,6 +1,7 @@
 package com.biocare.account.api;
 
-import com.biocare.account.dto.IndividualDTO;
+import com.biocare.common.bean.RequestWrapper;
+import com.biocare.common.bean.ResponseWrapper;
 
 /**
  * please descripe this java file
@@ -14,8 +15,8 @@ public interface IndividualDTOService {
     /**
      * query  Individual info by  his phone
      *
-     * @param phone phone num
-     * @return {@link IndividualDTO}
+     * @param request  request
+     * @return {@link ResponseWrapper}
      */
-    IndividualDTO query(String phone);
+    ResponseWrapper queryOneByCondition(RequestWrapper request);
 }

@@ -11,4 +11,13 @@ import com.yhxd.tools.mybatis.query.BaseQuery;
  */
 public class IndividualQuery extends BaseQuery {
 
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

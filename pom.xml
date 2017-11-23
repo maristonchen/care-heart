@@ -35,7 +35,7 @@
     </distributionManagement>
 
     <properties>
-        <spring-version>4.3.10.RELEASE</spring-version>
+        <spring-version>4.3.4.RELEASE</spring-version>
         <spring-security-version>4.2.3.RELEASE</spring-security-version>
         <fastjson-version>1.2.39</fastjson-version>
         <mybatis-verison>3.4.5</mybatis-verison>
@@ -43,6 +43,7 @@
         <mysql-version>5.1.6</mysql-version>
         <commons-io-version>2.4</commons-io-version>
         <log4j-version>1.2.17</log4j-version>
+        <log4j2-version>2.8.2</log4j2-version>
         <slf4j-version>1.7.21</slf4j-version>
         <activemq-version>5.14.0</activemq-version>
         <jackson-version>1.9.13</jackson-version>
@@ -359,12 +360,28 @@
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-redis</artifactId>
-                <version>2.0.1.RELEASE</version>
+                <version>1.7.5.RELEASE</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-oxm</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework.data</groupId>
+                        <artifactId>spring-data-keyvalue</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-keyvalue</artifactId>
-                <version>2.0.1.RELEASE</version>
+                <version>1.2.8.RELEASE</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>jcl-over-slf4j</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!-- spring end -->
             <!-- fastjson begin -->
@@ -390,7 +407,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
-                <version>1.0.15</version>
+                <version>1.1.4</version>
             </dependency>
             <dependency>
                 <groupId>org.mybatis</groupId>
@@ -433,6 +450,12 @@
                 <groupId>org.apache.zookeeper</groupId>
                 <artifactId>zookeeper</artifactId>
                 <version>${zookeeper-version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.101tec</groupId>
@@ -573,6 +596,41 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
+            <!-- log4j2 -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j2-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j2-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-web</artifactId>
+                <version>${log4j2-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j2-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-jcl</artifactId>
+                <version>${log4j2-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lmax</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>3.3.6</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
