@@ -13,6 +13,6 @@
 
 	<dubbo:reference id="registryService" interface="com.alibaba.dubbo.registry.RegistryService" />
 	
-	<!--<dubbo:reference id="individualInfoService" interface="com.biocare.account.api.IndividualInfoService" />-->
+	<dubbo:reference id="individualDTOService" interface="com.biocare.account.api.IndividualDTOService" />
 
 </beans>

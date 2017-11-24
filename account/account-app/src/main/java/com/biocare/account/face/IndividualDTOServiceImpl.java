@@ -5,7 +5,12 @@ import com.biocare.account.bean.Individual;
 import com.biocare.account.dto.IndividualDTO;
 import com.biocare.account.query.IndividualQuery;
 import com.biocare.account.service.IndividualService;
+import com.biocare.common.bean.RequestWrapper;
+import com.biocare.common.bean.ResponseWrapper;
+import com.biocare.common.em.GlobalErrorCode;
 import com.yhxd.tools.base.collection.CollectionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +28,11 @@ import java.util.List;
 public class IndividualDTOServiceImpl implements IndividualDTOService {
 
     /**
+      *  system log
+      */
+    private Logger logger = LoggerFactory.getLogger(IndividualDTOServiceImpl.class);
+
+    /**
      * individual service interface
      */
     @Resource
@@ -31,18 +41,26 @@ public class IndividualDTOServiceImpl implements IndividualDTOService {
     /**
      * query  Individual info by  his phone
      *
-     * @param phone phone num
-     * @return {@link IndividualDTO}
+     * @param request request
+     * @return {@link ResponseWrapper}
      */
     @Override
-    public IndividualDTO query(String phone) {
-        IndividualQuery query = new IndividualQuery();
-        List<Individual> individuals = individualService.queryList(query);
-        IndividualDTO individualDTO = null;
-        if (CollectionUtil.isNotEmpty(individuals)) {
-            individualDTO = new IndividualDTO();
-            BeanUtils.copyProperties(individuals.get(0), individualDTO);
+    public ResponseWrapper queryOneByCondition(RequestWrapper request) {
+        ResponseWrapper wrapper;
+        try {
+            IndividualQuery query = request.getContent(IndividualQuery.class);
+            List<Individual> individuals = individualService.queryList(query);
+            IndividualDTO individualDTO = null;
+            if (CollectionUtil.isNotEmpty(individuals)) {
+                individualDTO = new IndividualDTO();
+                BeanUtils.copyProperties(individuals.get(0), individualDTO);
+            }
+            wrapper = ResponseWrapper.create(GlobalErrorCode.SUCCESS, individualDTO);
+        } catch (Exception e) {
+            logger.error("Query individual info occurs an error ,that is [{}:{}]",e.getStackTrace()[0],e.getMessage());
+            wrapper = ResponseWrapper.create(e);
         }
-        return individualDTO;
+        return wrapper;
     }
+
 }

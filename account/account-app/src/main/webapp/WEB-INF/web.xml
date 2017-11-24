@@ -6,17 +6,31 @@
     <context-param>
         <!-- 如果不加, 同一tomcat部署会冲突 -->
         <param-name>webAppRootKey</param-name>
-        <param-value>authority</param-value>
+        <param-value>account</param-value>
     </context-param>
 
     <context-param>
-        <param-name>log4jConfigLocation</param-name>
-        <param-value>file:${user.dir}/conf/account/log4j.properties</param-value>
+        <param-name>log4jConfiguration</param-name>
+        <param-value>conf/account/log4j2.xml</param-value>
     </context-param>
 
+    <!-- log4j2-begin -->
     <listener>
-        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+        <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
     </listener>
+    <filter>
+        <filter-name>log4jServletFilter</filter-name>
+        <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>log4jServletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    <!-- log4j2-end -->
 
     <listener>
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>

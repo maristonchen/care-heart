@@ -2,6 +2,8 @@ package com.biocare.common.bean;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.biocare.common.em.ErrorCode;
+import com.biocare.common.em.GlobalErrorCode;
 import com.biocare.common.exception.BioException;
 import com.yhxd.tools.base.encrypt.MD5;
 import com.yhxd.tools.base.string.StringUtil;
@@ -20,12 +22,24 @@ public class ResponseWrapper implements Serializable {
 
     private static final long serialVersionUID = 7147083969363877101L;
 
+    /**
+     * error code
+     */
     private String code;
 
+    /**
+     * error message
+     */
     private String msg;
 
+    /**
+     * MD5 sign
+     */
     private String sign;
 
+    /**
+     * response
+     */
     private String result;
 
     public String getCode() {
@@ -44,19 +58,34 @@ public class ResponseWrapper implements Serializable {
         this.msg = msg;
     }
 
+    public static ResponseWrapper create(Exception e) {
+        ResponseWrapper wrapper;
+        if (e instanceof BioException) {
+            BioException bioException = (BioException) e;
+            wrapper = create(bioException);
+        }else{
+            wrapper = create(GlobalErrorCode.FAIL);
+        }
+        return wrapper;
+    }
+
     public static ResponseWrapper create(BioException e) {
-        return create(e.getErrorCode().getCode(), e.getErrorCode().getMsg());
+        return create(e.getErrorCode());
     }
 
-    public static ResponseWrapper create(String code, String msg) {
-        return create(code, msg, null);
+    public static ResponseWrapper create(ErrorCode errorCode) {
+        return create(errorCode.getCode(), errorCode.getMsg(), null);
     }
 
-    public static ResponseWrapper create(String code, String msg, Object param) {
+    public static ResponseWrapper create(ErrorCode errorCode, Object result) {
+        return create(errorCode.getCode(), errorCode.getMsg(), result);
+    }
+
+    private static ResponseWrapper create(String code, String msg, Object result) {
         ResponseWrapper responseWrapper = new ResponseWrapper();
         responseWrapper.code = code;
         responseWrapper.msg = msg;
-        responseWrapper.result = param == null ? StringUtil.EMPTY : JSON.toJSONString(param);
+        responseWrapper.result = result == null ? StringUtil.EMPTY : JSON.toJSONString(result);
         responseWrapper.sign = MD5.md5(responseWrapper.result);
         return responseWrapper;
     }
