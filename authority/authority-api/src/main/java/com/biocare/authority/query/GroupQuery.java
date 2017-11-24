@@ -3,7 +3,7 @@ package com.biocare.authority.query;
 import com.yhxd.tools.mybatis.query.BaseQuery;
 
 /**
- * please descripe this java file
+ * 用户组查询实体
  *
  * @author mariston
  * @version 1.0

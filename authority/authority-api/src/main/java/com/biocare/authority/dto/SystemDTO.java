@@ -1,7 +1,7 @@
 package com.biocare.authority.dto;
 
 /**
- * please descripe this java file
+ * 子系统输出实体
  *
  * @author mariston
  * @version 1.0
