@@ -6,6 +6,13 @@
             http://www.springframework.org/schema/tx
             http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <bean id="log-filter" class="com.alibaba.druid.filter.logging.Slf4jLogFilter">
+        <property name="connectionLogEnabled" value="false"/>
+        <property name="statementLogEnabled" value="false"/>
+        <property name="resultSetLogEnabled" value="true"/>
+        <property name="statementExecutableSqlLogEnable" value="true"/>
+    </bean>
+
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 
         <!-- 基本属性 url、user、password -->
@@ -37,8 +44,13 @@
         <property name="logAbandoned" value="true"/>
         <!-- 配置监控统计拦截的filters -->
         <property name="filters" value="${jdbc.druid.filters}"/>
-        <!-- <property name="proxyFilters"> <list> <ref bean="stat-filter"/> <ref
-            bean="wall-filter"/> <ref bean="log-filter"/> </list> </property> -->
+        <property name="proxyFilters">
+            <list>
+                <!--<ref bean="stat-filter"/>-->
+                <!--<ref bean="wall-filter"/>-->
+                <ref bean="log-filter"/>
+            </list>
+        </property>
     </bean>
 
     <!-- 创建SqlSessionFactory -->
