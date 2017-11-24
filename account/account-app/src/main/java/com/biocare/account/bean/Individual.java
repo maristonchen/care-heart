@@ -17,7 +17,7 @@ public class Individual implements Serializable {
     /**
      * 用户ID
      */
-    private String userId;
+    private String individualId;
 
     /**
      * 手机号
@@ -55,12 +55,12 @@ public class Individual implements Serializable {
     private String birthday;
 
 
-    public String getUserId() {
-        return userId;
+    public String getIndividualId() {
+        return individualId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setIndividualId(String individualId) {
+        this.individualId = individualId;
     }
 
     public String getPhone() {

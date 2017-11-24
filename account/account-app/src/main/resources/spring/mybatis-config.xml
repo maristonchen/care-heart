@@ -45,8 +45,8 @@
 
     <!-- 别名定义 -->
     <typeAliases>
-        <!-- <package name="com.yhxd.soa.query"/> -->
-        <package name="com.yhxd.soa.bean"/>
+         <package name="com.biocare.account.query"/>
+        <package name="com.biocare.account.bean"/>
     </typeAliases>
 
     <!--自定义类型处理器 -->

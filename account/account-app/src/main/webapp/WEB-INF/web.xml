@@ -69,20 +69,20 @@
     </filter-mapping>
 
     <!-- spring mvc -->
-    <servlet>
-        <servlet-name>spring mvc</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring/spring-mvc.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>spring mvc</servlet-name>-->
+        <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>contextConfigLocation</param-name>-->
+            <!--<param-value>classpath:spring/spring-mvc.xml</param-value>-->
+        <!--</init-param>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>spring mvc</servlet-name>
-        <url-pattern>/web/*</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>spring mvc</servlet-name>-->
+        <!--<url-pattern>/web/*</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <!-- 浏览器输入到项目名，默认打开如下配置页面 -->
     <welcome-file-list>
