@@ -7,7 +7,7 @@ import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import com.yhxd.tools.mybatis.service.AbstractBaseService;
 
 /**
- * please descripe this java file
+ * 用户组业务接口实现类
  *
  * @author mariston
  * @version 1.0

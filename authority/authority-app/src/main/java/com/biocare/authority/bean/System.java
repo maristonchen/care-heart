@@ -1,7 +1,7 @@
 package com.biocare.authority.bean;
 
 /**
- * sub system
+ * 子系统实体类
  *
  * @author mariston
  * @version 1.0
@@ -9,12 +9,24 @@ package com.biocare.authority.bean;
  */
 public class System {
 
+    /**
+     * 子系统ID
+     */
     private String sysId;
 
+    /**
+     * 名称
+     */
     private String name;
 
+    /**
+     * 路径
+     */
     private String url;
 
+    /**
+     * 状态
+     */
     private Integer status;
 
     public String getSysId() {
@@ -48,4 +60,6 @@ public class System {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+
 }

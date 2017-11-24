@@ -1,7 +1,7 @@
 package com.biocare.authority.bean;
 
 /**
- * please descripe this java file
+ * 用户组
  *
  * @author mariston
  * @version 1.0

@@ -5,7 +5,7 @@ import com.biocare.authority.query.GroupQuery;
 import com.yhxd.tools.mybatis.service.BaseService;
 
 /**
- * please descripe this java file
+ * 用户组业务接口
  *
  * @author mariston
  * @version 1.0

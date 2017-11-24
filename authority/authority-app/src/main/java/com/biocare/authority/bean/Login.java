@@ -1,7 +1,9 @@
 package com.biocare.authority.bean;
 
+import com.alibaba.fastjson.JSON;
+
 /**
- * login info
+ * 登录实体类
  *
  * @author mariston
  * @version 1.0
@@ -9,16 +11,34 @@ package com.biocare.authority.bean;
  */
 public class Login {
 
+    /**
+     * 用户ID
+     */
     private String userId;
 
+    /**
+     * 手机号
+     */
     private String phone;
 
+    /**
+     * 用户名
+     */
     private String name;
 
+    /**
+     * 密码
+     */
     private String password;
 
+    /**
+     * 盐
+     */
     private String salt;
 
+    /**
+     * 创建时间
+     */
     private String createTime;
 
     private String createBy;
@@ -77,5 +97,10 @@ public class Login {
 
     public void setCreateBy(String createBy) {
         this.createBy = createBy;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }

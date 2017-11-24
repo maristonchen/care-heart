@@ -1,7 +1,9 @@
 package com.biocare.authority.bean;
 
+import com.alibaba.fastjson.JSON;
+
 /**
- * right item
+ * 权限实体类
  *
  * @author mariston
  * @version 1.0
@@ -9,18 +11,39 @@ package com.biocare.authority.bean;
  */
 public class Right {
 
+    /**
+     * 权限ID
+     */
     private String rightId;
 
+    /**
+     * 名称
+     */
     private String name;
 
+    /**
+     * 类型
+     */
     private Integer type;
 
+    /**
+     * 地址
+     */
     private String url;
 
+    /**
+     * 标签
+     */
     private String tag;
 
+    /**
+     * 父ID
+     */
     private String parentId;
 
+    /**
+     * 状态
+     */
     private Integer status;
 
     public String getRightId() {
@@ -77,5 +100,10 @@ public class Right {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }

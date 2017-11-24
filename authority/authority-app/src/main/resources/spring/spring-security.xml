@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <sec:http auto-config="true">
+        <sec:intercept-url pattern="/css/*" access="permitAll()"/>
+        <sec:intercept-url pattern="/images/*" access="permitAll()"/>
+        <sec:intercept-url pattern="/js/*" access="permitAll()"/>
+        <sec:intercept-url pattern="/WEB-INF/view/*" access="permitAll()"/>
+        <sec:intercept-url pattern="/login" access="permitAll()"/>
+        <sec:intercept-url pattern="/example/*" access="hasRole('ROLE_USER')"/>
+
+    </sec:http>
+
+    <sec:authentication-manager>
+        <sec:authentication-provider user-service-ref="testUserDetailService">
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+
+    <bean id="testUserDetailService" class="com.biocare.authority.service.base.impl.TestUserDetailService"/>
+
+
+</beans>

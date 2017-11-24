@@ -7,7 +7,7 @@ import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
 /**
- * please descripe this java file
+ * 用户组Mapper
  *
  * @author mariston
  * @version 1.0
@@ -16,5 +16,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Meta(tableName = "t_group_info",keyProperty = "groupId")
 public interface GroupMapper extends BaseMapper<Group, GroupQuery> {
-
 }
