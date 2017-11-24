@@ -14,10 +14,6 @@
         <param-value>conf/heart/log4j2.xml</param-value>
     </context-param>
 
-    <!--<listener>-->
-        <!--<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>-->
-    <!--</listener>-->
-
     <!-- log4j2-begin -->
     <listener>
         <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>

@@ -36,9 +36,12 @@ public class IndividualController {
     @ResponseBody
     IndividualVO queryIndividual() {
         IndividualQuery query = new IndividualQuery();
-        query.setName("testName");
-        ResponseWrapper responseWrapper = individualDTOService.queryOneByCondition(RequestWrapper.create(query));
-        logger.info("Response wrapper is {}",responseWrapper);
-        return null;
+//        query.setName("testName");
+//        ResponseWrapper responseWrapper = individualDTOService.queryOneByCondition(RequestWrapper.create(query));
+//        logger.info("Response wrapper is {}",responseWrapper);
+        IndividualVO individualVO = new IndividualVO();
+        individualVO.setEmail("maristonchen@126.com");
+//        individualVO.setName("mariston");
+        return individualVO;
     }
 }

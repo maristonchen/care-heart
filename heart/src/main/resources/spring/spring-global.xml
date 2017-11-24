@@ -10,7 +10,9 @@
     <!-- 因为spring的context是父子容器，所以会产生冲突，Controller会先进行扫描装配， 而此时的Service还没有进行事务的增强处理，得到的将是原样的Service（没有经过事务加强处理，故而没有事务处理能力）
         最后才是applicationContext.xml中的扫描配置进行事务处理 -->
 
-    <context:component-scan base-package="com.biocare.*"/>
+    <context:component-scan base-package="com.biocare.heart.*">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <!-- 启用spring mvc 注解 -->
     <context:annotation-config/>
