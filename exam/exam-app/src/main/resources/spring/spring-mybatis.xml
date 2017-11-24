@@ -5,6 +5,12 @@
             http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/tx
             http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <bean id="log-filter" class="com.alibaba.druid.filter.logging.Slf4jLogFilter">
+        <property name="connectionLogEnabled" value="false"/>
+        <property name="statementLogEnabled" value="false"/>
+        <property name="resultSetLogEnabled" value="true"/>
+        <property name="statementExecutableSqlLogEnable" value="true"/>
+    </bean>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 
@@ -37,21 +43,26 @@
         <property name="logAbandoned" value="true"/>
         <!-- 配置监控统计拦截的filters -->
         <property name="filters" value="${jdbc.druid.filters}"/>
-        <!-- <property name="proxyFilters"> <list> <ref bean="stat-filter"/> <ref
-            bean="wall-filter"/> <ref bean="log-filter"/> </list> </property> -->
+        <property name="proxyFilters">
+            <list>
+                <!--<ref bean="stat-filter"/>-->
+                <!--<ref bean="wall-filter"/>-->
+                <ref bean="log-filter"/>
+            </list>
+        </property>
     </bean>
 
     <!-- 创建SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:com/biocare/authority/mapper/mapping/*.xml"/>
+        <property name="mapperLocations" value="classpath:com/biocare/exam/mapper/mapping/*.xml"/>
         <property name="configLocation" value="classpath:/spring/mybatis-config.xml"/>
     </bean>
 
     <!-- 自动扫描映射器,接口mapper -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <property name="basePackage" value="com.biocare.authority.mapper"/>
+        <property name="basePackage" value="com.biocare.exam.mapper"/>
         <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
     </bean>
 

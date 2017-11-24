@@ -10,13 +10,27 @@
     </context-param>
 
     <context-param>
-        <param-name>log4jConfigLocation</param-name>
-        <param-value>file:${user.dir}/conf/exam/log4j.properties</param-value>
+        <param-name>log4jConfiguration</param-name>
+        <param-value>conf/exam/log4j2.xml</param-value>
     </context-param>
 
+    <!-- log4j2-begin -->
     <listener>
-        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+        <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
     </listener>
+    <filter>
+        <filter-name>log4jServletFilter</filter-name>
+        <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>log4jServletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    <!-- log4j2-end -->
 
     <listener>
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
@@ -55,20 +69,20 @@
     </filter-mapping>
 
     <!-- spring mvc -->
-    <servlet>
-        <servlet-name>spring mvc</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring/spring-mvc.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>spring mvc</servlet-name>-->
+        <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>contextConfigLocation</param-name>-->
+            <!--<param-value>classpath:spring/spring-mvc.xml</param-value>-->
+        <!--</init-param>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>spring mvc</servlet-name>
-        <url-pattern>/web/*</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>spring mvc</servlet-name>-->
+        <!--<url-pattern>/web/*</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <!-- 浏览器输入到项目名，默认打开如下配置页面 -->
     <welcome-file-list>
