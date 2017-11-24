@@ -14,28 +14,7 @@ public enum GlobalErrorCode implements ErrorCode {
     SUCCESS("000000", "the operation is successful"),
     OBJECT_PARAM_NULL("900001", "the object is null"),
     STRING_PARAM_EMPTY("900002", "the string is empty"),
-    FAIL("999999", "the operation is failed"),
-
-    //权限认证错误码范围（010001-020000）
-    NAME_EMPTY_ERROR("010001","登录用户名为空！"),
-    USER_EMPTY_ERROR("010002","用户信息为空！"),
-    ROLE_EMPTY_ERROR("010003","角色信息为空！"),
-    RIGHT_EMPTY_ERROR("010004","权限信息为空！" )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ;
+    FAIL("999999", "the operation is failed");
 
     /**
      * error code

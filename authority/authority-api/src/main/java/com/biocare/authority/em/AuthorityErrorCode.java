@@ -14,6 +14,10 @@ import com.yhxd.tools.base.string.StringUtil;
  * @since 2017/11/21 15:15
  */
 public enum AuthorityErrorCode implements ErrorCode {
+    NAME_EMPTY_ERROR("010001","登录用户名为空！"),
+    USER_EMPTY_ERROR("010002","用户信息为空！"),
+    ROLE_EMPTY_ERROR("010003","角色信息为空！"),
+    RIGHT_EMPTY_ERROR("010004","权限信息为空！" )
     ;
 
     /**
