@@ -2,11 +2,11 @@ package com.biocare.authority.controller;
 
 import com.biocare.authority.bean.Role;
 import com.biocare.authority.bean.RoleRight;
+import com.biocare.authority.em.AuthorityErrorCode;
 import com.biocare.authority.query.RoleQuery;
 import com.biocare.authority.query.RoleRightQuery;
 import com.biocare.authority.service.RoleRightService;
 import com.biocare.authority.service.RoleService;
-import com.biocare.common.em.GlobalErrorCode;
 import com.biocare.common.exception.BioException;
 import com.biocare.common.utils.BioAssert;
 import org.slf4j.Logger;
@@ -56,18 +56,18 @@ public class RoleController {
     public String insert(Role role){
         try {
             //参数校验
-            BioAssert.notNull(role, GlobalErrorCode.ROLE_EMPTY_ERROR);
+            BioAssert.notNull(role, AuthorityErrorCode.ROLE_EMPTY_ERROR);
 
             //保存角色
             roleService.save(role);
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("添加角色信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -83,8 +83,8 @@ public class RoleController {
     public String insertRoleRight(Role role,List<RoleRight> roleRightList){
         try {
             //参数校验
-            BioAssert.notNull(role, GlobalErrorCode.ROLE_EMPTY_ERROR);
-            BioAssert.notEmpty(roleRightList,GlobalErrorCode.RIGHT_EMPTY_ERROR);
+            BioAssert.notNull(role, AuthorityErrorCode.ROLE_EMPTY_ERROR);
+            BioAssert.notEmpty(roleRightList,AuthorityErrorCode.RIGHT_EMPTY_ERROR);
 
             //保存角色
             roleService.save(role);
@@ -95,13 +95,13 @@ public class RoleController {
                 roleRightService.save(roleRight);
             }
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("添加角色信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -116,18 +116,18 @@ public class RoleController {
     public String update(Role role){
         try {
             //参数校验
-            BioAssert.notNull(role, GlobalErrorCode.ROLE_EMPTY_ERROR);
+            BioAssert.notNull(role, AuthorityErrorCode.ROLE_EMPTY_ERROR);
 
             //修改角色
             roleService.modifyById(role);
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("修改角色信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -143,8 +143,8 @@ public class RoleController {
     public String updateRoleRight(Role role,List<RoleRight> roleRightList){
         try {
             //参数校验
-            BioAssert.notNull(role, GlobalErrorCode.ROLE_EMPTY_ERROR);
-            BioAssert.notEmpty(roleRightList,GlobalErrorCode.RIGHT_EMPTY_ERROR);
+            BioAssert.notNull(role, AuthorityErrorCode.ROLE_EMPTY_ERROR);
+            BioAssert.notEmpty(roleRightList,AuthorityErrorCode.RIGHT_EMPTY_ERROR);
 
             //修改角色
             roleService.modifyById(role);
@@ -160,13 +160,13 @@ public class RoleController {
                 roleRightService.save(roleRight);
             }
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("修改角色信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -181,18 +181,18 @@ public class RoleController {
     public String delete(String roleId){
         try {
             //参数校验
-            BioAssert.notNull(roleId, GlobalErrorCode.ROLE_EMPTY_ERROR);
+            BioAssert.notNull(roleId, AuthorityErrorCode.ROLE_EMPTY_ERROR);
 
             //删除角色
             roleService.removeById(roleId);
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("删除角色信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -207,7 +207,7 @@ public class RoleController {
     public String deleteRoleRight(String roleId){
         try {
             //参数校验
-            BioAssert.notNull(roleId, GlobalErrorCode.ROLE_EMPTY_ERROR);
+            BioAssert.notNull(roleId, AuthorityErrorCode.ROLE_EMPTY_ERROR);
 
             //删除角色
             roleService.removeById(roleId);
@@ -217,13 +217,13 @@ public class RoleController {
             roleRightQuery.setRoleId(roleId);
             roleRightService.removeByQuery(roleRightQuery);
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("删除角色信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -238,7 +238,7 @@ public class RoleController {
     public String listRoles(RoleQuery roleQuery){
         try {
             //参数校验
-            BioAssert.notNull(roleQuery, GlobalErrorCode.ROLE_EMPTY_ERROR);
+            BioAssert.notNull(roleQuery, AuthorityErrorCode.ROLE_EMPTY_ERROR);
 
             //查询角色
             List<Role> list=roleService.queryList(roleQuery);
@@ -249,7 +249,7 @@ public class RoleController {
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }

@@ -1,9 +1,9 @@
 package com.biocare.authority.controller;
 
 import com.biocare.authority.bean.Right;
+import com.biocare.authority.em.AuthorityErrorCode;
 import com.biocare.authority.query.RightQuery;
 import com.biocare.authority.service.RightServcie;
-import com.biocare.common.em.GlobalErrorCode;
 import com.biocare.common.exception.BioException;
 import com.biocare.common.utils.BioAssert;
 import org.slf4j.Logger;
@@ -48,18 +48,18 @@ public class RightController {
     public String insert(Right right){
         try {
             //参数校验
-            BioAssert.notNull(right, GlobalErrorCode.OBJECT_PARAM_NULL);
+            BioAssert.notNull(right, AuthorityErrorCode.RIGHT_EMPTY_ERROR);
 
             //保存权限
             rightService.save(right);
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("添加权限信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.OBJECT_PARAM_NULL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -74,18 +74,18 @@ public class RightController {
     public String update(Right right){
         try {
             //参数校验
-            BioAssert.notNull(right, GlobalErrorCode.OBJECT_PARAM_NULL);
+            BioAssert.notNull(right, AuthorityErrorCode.RIGHT_EMPTY_ERROR);
 
             //保存权限
             rightService.modifyById(right);
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("修改权限信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.OBJECT_PARAM_NULL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -100,18 +100,18 @@ public class RightController {
     public String delete(String rightId){
         try {
             //参数校验
-            BioAssert.notNull(rightId, GlobalErrorCode.OBJECT_PARAM_NULL);
+            BioAssert.notNull(rightId, AuthorityErrorCode.RIGHT_EMPTY_ERROR);
 
             //保存权限
             rightService.removeById(rightId);
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("删除权限信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.OBJECT_PARAM_NULL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -126,7 +126,7 @@ public class RightController {
     public String listRoles(RightQuery rightQuery){
         try {
             //参数校验
-            BioAssert.notNull(rightQuery, GlobalErrorCode.OBJECT_PARAM_NULL);
+            BioAssert.notNull(rightQuery, AuthorityErrorCode.RIGHT_EMPTY_ERROR);
 
             //保存权限
             List<Right> list=rightService.queryList(rightQuery);
@@ -137,7 +137,7 @@ public class RightController {
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.OBJECT_PARAM_NULL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }

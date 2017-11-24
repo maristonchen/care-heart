@@ -2,11 +2,11 @@ package com.biocare.authority.controller;
 
 import com.biocare.authority.bean.User;
 import com.biocare.authority.bean.UserRole;
+import com.biocare.authority.em.AuthorityErrorCode;
 import com.biocare.authority.query.UserQuery;
 import com.biocare.authority.query.UserRoleQuery;
 import com.biocare.authority.service.UserRoleService;
 import com.biocare.authority.service.UserService;
-import com.biocare.common.em.GlobalErrorCode;
 import com.biocare.common.exception.BioException;
 import com.biocare.common.utils.BioAssert;
 import org.slf4j.Logger;
@@ -57,18 +57,18 @@ public class UserController {
     public String insert(User user){
         try {
             //参数校验
-            BioAssert.notNull(user, GlobalErrorCode.USER_EMPTY_ERROR);
+            BioAssert.notNull(user, AuthorityErrorCode.USER_EMPTY_ERROR);
 
             //保存用户
             userService.save(user);
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("添加用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -84,8 +84,8 @@ public class UserController {
     public String insertUserRole(User user,List<UserRole> userRoleList){
         try {
             //参数校验
-            BioAssert.notNull(user, GlobalErrorCode.USER_EMPTY_ERROR);
-            BioAssert.notEmpty(userRoleList,GlobalErrorCode.ROLE_EMPTY_ERROR);
+            BioAssert.notNull(user, AuthorityErrorCode.USER_EMPTY_ERROR);
+            BioAssert.notEmpty(userRoleList,AuthorityErrorCode.ROLE_EMPTY_ERROR);
 
             //保存用户
             userService.save(user);
@@ -96,13 +96,13 @@ public class UserController {
                 userRoleService.save(userRole);
             }
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("添加用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -117,18 +117,18 @@ public class UserController {
     public String update(User user){
         try {
             //参数校验
-            BioAssert.notNull(user, GlobalErrorCode.USER_EMPTY_ERROR);
+            BioAssert.notNull(user, AuthorityErrorCode.USER_EMPTY_ERROR);
 
             //修改角色
             userService.modifyById(user);
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("修改用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -144,8 +144,8 @@ public class UserController {
     public String updateUserRole(User user,List<UserRole> userRoleList){
         try {
             //参数校验
-            BioAssert.notNull(user, GlobalErrorCode.USER_EMPTY_ERROR);
-            BioAssert.notEmpty(userRoleList,GlobalErrorCode.ROLE_EMPTY_ERROR);
+            BioAssert.notNull(user, AuthorityErrorCode.USER_EMPTY_ERROR);
+            BioAssert.notEmpty(userRoleList,AuthorityErrorCode.ROLE_EMPTY_ERROR);
 
             //修改角色
             userService.modifyById(user);
@@ -161,13 +161,13 @@ public class UserController {
                 userRoleService.save(userRole);
             }
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("修改用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -182,18 +182,18 @@ public class UserController {
     public String delete(String userId){
         try {
             //参数校验
-            BioAssert.notNull(userId, GlobalErrorCode.USER_EMPTY_ERROR);
+            BioAssert.notNull(userId, AuthorityErrorCode.USER_EMPTY_ERROR);
 
             //删除用户
             userService.removeById(userId);
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("删除用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -208,7 +208,7 @@ public class UserController {
     public String deleteUserRole(String userId){
         try {
             //参数校验
-            BioAssert.notNull(userId, GlobalErrorCode.OBJECT_PARAM_NULL);
+            BioAssert.notNull(userId, AuthorityErrorCode.USER_EMPTY_ERROR);
 
             //删除用户
             userService.removeById(userId);
@@ -218,13 +218,13 @@ public class UserController {
             userRoleQuery.setUserId(userId);
             userRoleService.removeByQuery(userRoleQuery);
 
-            return GlobalErrorCode.SUCCESS.toString();
+            return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
             logger.info("删除用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
@@ -239,7 +239,7 @@ public class UserController {
     public String listRoles(UserQuery userQuery){
         try {
             //参数校验
-            BioAssert.notNull(userQuery, GlobalErrorCode.USER_EMPTY_ERROR);
+            BioAssert.notNull(userQuery, AuthorityErrorCode.USER_EMPTY_ERROR);
 
             //查询用户
             List<User> list = userService.queryList(userQuery);
@@ -250,7 +250,7 @@ public class UserController {
             if(e instanceof BioException){
                 throw e;
             }else{
-                throw new BioException(GlobalErrorCode.FAIL);
+                throw new BioException(AuthorityErrorCode.FAIL);
             }
         }
     }
