@@ -1,6 +1,6 @@
-package com.biocare.plateform.controller;
+package com.biocare.platform.controller;
 
-import com.biocare.plateform.service.TemplateTableService;
+import com.biocare.platform.service.TemplateTableService;
 import com.yhxd.tools.web.result.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

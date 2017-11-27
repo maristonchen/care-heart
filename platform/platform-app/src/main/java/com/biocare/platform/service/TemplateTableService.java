@@ -1,9 +1,9 @@
-package com.biocare.plateform.service;
+package com.biocare.platform.service;
 
 
-import com.biocare.plateform.query.TemplateTablePageQuery;
-import com.biocare.plateform.bean.TemplateTable;
-import com.biocare.plateform.query.TemplateTableQuery;
+import com.biocare.platform.bean.TemplateTable;
+import com.biocare.platform.query.TemplateTablePageQuery;
+import com.biocare.platform.query.TemplateTableQuery;
 import com.yhxd.tools.mybatis.service.BaseService;
 import com.yhxd.tools.web.result.JsonResult;
 

@@ -1,4 +1,4 @@
-package com.biocare.plateform.bean;
+package com.biocare.platform.bean;
 
 import java.io.Serializable;
 import java.util.Date;

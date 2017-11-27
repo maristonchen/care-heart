@@ -1,7 +1,7 @@
-package com.biocare.plateform.mapper;
+package com.biocare.platform.mapper;
 
-import com.biocare.plateform.bean.TemplateTable;
-import com.biocare.plateform.query.TemplateTableQuery;
+import com.biocare.platform.bean.TemplateTable;
+import com.biocare.platform.query.TemplateTableQuery;
 import com.yhxd.tools.mybatis.annotations.Meta;
 import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;

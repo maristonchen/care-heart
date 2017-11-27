@@ -1,4 +1,4 @@
-package com.biocare.plateform.query;
+package com.biocare.platform.query;
 
 import java.util.Date;
 

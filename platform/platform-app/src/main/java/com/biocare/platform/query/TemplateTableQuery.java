@@ -1,4 +1,4 @@
-package com.biocare.plateform.query;
+package com.biocare.platform.query;
 
 import com.yhxd.tools.mybatis.query.BaseQuery;
 
