@@ -13,9 +13,25 @@ import org.apache.commons.lang3.RandomStringUtils;
 public abstract class UniqueNoUtil {
 
     /**
-     * 主键编号前缀
+     * 主键编号前缀模板(长度为4)
      */
-    public static final String T_TABLE_INFO = "TTI";
+    public static final String T_TABLE_INFO = "TTAI";
+
+    public static final String T_USER_INFO = "TUSI";
+
+    public static final String T_ROLE_INFO = "TROI";
+
+    public static final String T_RIGHT_INFO = "TRII";
+
+    public static final String T_USER_ROLE_INFO = "TURI";
+
+    public static final String T_ROLE_RIGHT_INFO = "TRRI";
+
+    public static final String T_LOGIN_INTO = "TLOI";
+
+    public static final String T_GROUP_INTO = "TGRI";
+
+    public static final String T_SYSTEM_INTO = "TSYI";
 
     /**
      * 生成主键编号

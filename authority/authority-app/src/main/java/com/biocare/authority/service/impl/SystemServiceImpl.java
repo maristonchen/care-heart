@@ -4,6 +4,7 @@ import com.biocare.authority.bean.System;
 import com.biocare.authority.mapper.SystemMapper;
 import com.biocare.authority.query.SystemQuery;
 import com.biocare.authority.service.SystemService;
+import com.biocare.common.utils.UniqueNoUtil;
 import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import com.yhxd.tools.mybatis.service.AbstractBaseService;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,15 @@ public class SystemServiceImpl extends AbstractBaseService<System,SystemQuery> i
     @Override
     protected BaseMapper<System, SystemQuery> getMapper() {
         return this.systemMapper;
+    }
+
+    /**
+     * 重写插入方法，设置自定义主键
+     * @param system 子系统
+     */
+    @Override
+    public void save(System system) {
+        system.setSysId(UniqueNoUtil.genNumber(UniqueNoUtil.T_SYSTEM_INTO));
+        super.save(system);
     }
 }

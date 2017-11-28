@@ -4,6 +4,7 @@ import com.biocare.authority.bean.UserRole;
 import com.biocare.authority.mapper.UserRoleMapper;
 import com.biocare.authority.query.UserRoleQuery;
 import com.biocare.authority.service.UserRoleService;
+import com.biocare.common.utils.UniqueNoUtil;
 import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import com.yhxd.tools.mybatis.service.AbstractBaseService;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,15 @@ public class UserRoleServiceImpl extends AbstractBaseService<UserRole,UserRoleQu
     @Override
     protected BaseMapper<UserRole, UserRoleQuery> getMapper() {
         return this.userRoleMapper;
+    }
+
+    /**
+     * 重写插入方法，设置自定义主键
+     * @param userRole 用户角色
+     */
+    @Override
+    public void save(UserRole userRole) {
+        userRole.setUrId(UniqueNoUtil.genNumber(UniqueNoUtil.T_USER_ROLE_INFO));
+        super.save(userRole);
     }
 }

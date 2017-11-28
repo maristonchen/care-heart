@@ -38,9 +38,9 @@ public class TestUserService {
     @Test
     public void testInsert(){
         User user =new User();
-        user.setName("root");
+        user.setUsername("root");
         user.setPassword("123456");
-        user.setRealName("管理员");
+        user.setRealName("张三");
         user.setStatus(1);
         userService.save(user);
         System.out.println("添加成功！");
@@ -52,8 +52,8 @@ public class TestUserService {
     @Test
     public void testInsertUserRole(){
         UserRole userRole =new UserRole();
-        userRole.setUserId("af254af5-d589-420171123174311479");
-        userRole.setRoleId("985b91e3-8530-420171123180153776");
+        userRole.setUserId("TUSI2017112811112113685995171436");
+        userRole.setRoleId("TROI2017112811104544811503166456");
         userRoleService.save(userRole);
         System.out.println("添加成功！");
     }

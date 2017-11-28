@@ -3,6 +3,7 @@ package com.biocare.authority.service.impl;
 import com.biocare.authority.bean.Group;
 import com.biocare.authority.query.GroupQuery;
 import com.biocare.authority.service.GroupService;
+import com.biocare.common.utils.UniqueNoUtil;
 import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import com.yhxd.tools.mybatis.service.AbstractBaseService;
 
@@ -23,5 +24,11 @@ public class GroupServiceImpl extends AbstractBaseService<Group, GroupQuery> imp
     @Override
     protected BaseMapper<Group, GroupQuery> getMapper() {
         return null;
+    }
+
+    @Override
+    public void save(Group group) {
+        group.setGroupId(UniqueNoUtil.genNumber(UniqueNoUtil.T_GROUP_INTO));
+        super.save(group);
     }
 }

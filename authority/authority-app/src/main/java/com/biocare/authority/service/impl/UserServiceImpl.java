@@ -4,6 +4,7 @@ import com.biocare.authority.bean.User;
 import com.biocare.authority.mapper.UserMapper;
 import com.biocare.authority.query.UserQuery;
 import com.biocare.authority.service.UserService;
+import com.biocare.common.utils.UniqueNoUtil;
 import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import com.yhxd.tools.mybatis.service.AbstractBaseService;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,15 @@ public class UserServiceImpl extends AbstractBaseService<User,UserQuery> impleme
     @Override
     protected BaseMapper<User, UserQuery> getMapper() {
         return this.userMapper;
+    }
+
+    /**
+     * 重写插入方法，设置自定义主键
+     * @param user 用户
+     */
+    @Override
+    public void save(User user) {
+        user.setUserId(UniqueNoUtil.genNumber(UniqueNoUtil.T_USER_INFO));
+        super.save(user);
     }
 }

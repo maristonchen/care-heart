@@ -17,7 +17,7 @@ public class User {
     /**
      * 用户名
      */
-    private String name;
+    private String username;
 
     /**
      * 密码
@@ -30,9 +30,29 @@ public class User {
     private Integer status;
 
     /**
+     * 昵称
+     */
+    private String nickName;
+
+    /**
      * 真实姓名
      */
     private String realName;
+
+    /**
+     * 性别
+     */
+    private Integer sex;
+
+    /**
+     * 出生年月
+     */
+    private String birthday;
+
+    /**
+     * 邮箱
+     */
+    private String email;
 
     public String getUserId() {
         return userId;
@@ -42,12 +62,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -66,11 +86,43 @@ public class User {
         this.status = status;
     }
 
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     public String getRealName() {
         return realName;
     }
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
