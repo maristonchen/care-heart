@@ -1,14 +1,15 @@
 package com.biocare.authority.controller;
 
-import com.biocare.authority.bean.User;
-import com.biocare.authority.bean.UserRole;
+import com.biocare.authority.bean.Login;
+import com.biocare.authority.bean.LoginRole;
 import com.biocare.authority.em.AuthorityErrorCode;
-import com.biocare.authority.query.UserQuery;
-import com.biocare.authority.query.UserRoleQuery;
-import com.biocare.authority.service.UserRoleService;
-import com.biocare.authority.service.UserService;
+import com.biocare.authority.query.LoginQuery;
+import com.biocare.authority.query.LoginRoleQuery;
+import com.biocare.authority.service.LoginService;
+import com.biocare.authority.service.LoginRoleService;
 import com.biocare.common.exception.BioException;
 import com.biocare.common.utils.BioAssert;
+import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -20,51 +21,51 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 用户控制器
+ * 登录用户控制器
  *
  * @author Quintic
  * @version 1.0
  * @since 2017/11/23 16:35
  */
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/login")
+public class LoginController {
 
     /**
      * 日志
      */
-    private Logger logger = LoggerFactory.getLogger(UserController.class);
+    private Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     /**
-     * 用户业务接口
+     * 登录用户业务接口
      */
     @Resource
-    private UserService userService;
+    private LoginService loginService;
 
     /**
      * 用户角色业务接口
      */
     @Resource
-    private UserRoleService userRoleService;
+    private LoginRoleService loginRoleService;
 
     /**
-     * 插入用户
-     * @param user 用户
+     * 插入登录用户
+     * @param login 登录用户
      * @return
      */
     @RequestMapping(value = "/insert",method = RequestMethod.POST, produces = {"text/html;charset=utf-8"})
     @ResponseBody
-    public String insert(User user){
+    public String insert(Login login){
         try {
             //参数校验
-            BioAssert.notNull(user, AuthorityErrorCode.USER_EMPTY_ERROR);
+            BioAssert.notNull(login, AuthorityErrorCode.USER_EMPTY_ERROR);
 
             //保存用户
-            userService.save(user);
+            loginService.save(login);
 
             return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
-            logger.info("添加用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
+            logger.info("添加登录用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
@@ -74,31 +75,31 @@ public class UserController {
     }
 
     /**
-     * 插入用户以及关联的角色
-     * @param user 用户
-     * @param userRoleList 用户角色
+     * 插入登录用户以及关联的角色
+     * @param login 登录用户
+     * @param loginRoleList 登录用户角色
      * @return
      */
     @RequestMapping(value = "/insertUserRole",method = RequestMethod.POST, produces = {"text/html;charset=utf-8"})
     @ResponseBody
-    public String insertUserRole(User user,List<UserRole> userRoleList){
+    public String insertUserRole(Login login,List<LoginRole> loginRoleList){
         try {
             //参数校验
-            BioAssert.notNull(user, AuthorityErrorCode.USER_EMPTY_ERROR);
-            BioAssert.notEmpty(userRoleList,AuthorityErrorCode.ROLE_EMPTY_ERROR);
+            BioAssert.notNull(login, AuthorityErrorCode.USER_EMPTY_ERROR);
+            BioAssert.notEmpty(loginRoleList,AuthorityErrorCode.ROLE_EMPTY_ERROR);
 
-            //保存用户
-            userService.save(user);
+            //保存登录用户
+            loginService.save(login);
 
-            //保存用户拥有的角色
-            for (UserRole userRole:userRoleList) {
-                userRole.setUrId(user.getUserId());
-                userRoleService.save(userRole);
+            //保存登录用户拥有的角色
+            for (LoginRole loginRole:loginRoleList) {
+                loginRole.setUrId(login.getUserId());
+                loginRoleService.save(loginRole);
             }
 
             return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
-            logger.info("添加用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
+            logger.info("添加登录用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
@@ -108,23 +109,23 @@ public class UserController {
     }
 
     /**
-     * 修改用户
-     * @param user 用户
+     * 修改登录用户
+     * @param login 登录用户
      * @return
      */
     @RequestMapping(value = "/update",method = RequestMethod.POST, produces = {"text/html;charset=utf-8"})
     @ResponseBody
-    public String update(User user){
+    public String update(Login login){
         try {
             //参数校验
-            BioAssert.notNull(user, AuthorityErrorCode.USER_EMPTY_ERROR);
+            BioAssert.notNull(login, AuthorityErrorCode.USER_EMPTY_ERROR);
 
-            //修改角色
-            userService.modifyById(user);
+            //修改登录用户
+            loginService.modifyById(login);
 
             return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
-            logger.info("修改用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
+            logger.info("修改登录用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
@@ -134,36 +135,36 @@ public class UserController {
     }
 
     /**
-     * 修改用户以及关联的角色
-     * @param user
-     * @param userRoleList
+     * 修改登录用户以及关联的角色
+     * @param login
+     * @param loginRoleList
      * @return
      */
     @RequestMapping(value = "/updateUserRole",method = RequestMethod.POST, produces = {"text/html;charset=utf-8"})
     @ResponseBody
-    public String updateUserRole(User user,List<UserRole> userRoleList){
+    public String updateUserRole(Login login,List<LoginRole> loginRoleList){
         try {
             //参数校验
-            BioAssert.notNull(user, AuthorityErrorCode.USER_EMPTY_ERROR);
-            BioAssert.notEmpty(userRoleList,AuthorityErrorCode.ROLE_EMPTY_ERROR);
+            BioAssert.notNull(login, AuthorityErrorCode.USER_EMPTY_ERROR);
+            BioAssert.notEmpty(loginRoleList,AuthorityErrorCode.ROLE_EMPTY_ERROR);
 
-            //修改角色
-            userService.modifyById(user);
+            //修改登录角色
+            loginService.modifyById(login);
 
             //修改用户对应的角色
             //1.删除原有的角色关联
-            UserRoleQuery userRoleQuery=new UserRoleQuery();
-            userRoleQuery.setUserId(user.getUserId());
-            userRoleService.removeByQuery(userRoleQuery);
+            LoginRoleQuery loginRoleQuery=new LoginRoleQuery();
+            loginRoleQuery.setUserId(login.getUserId());
+            loginRoleService.removeByQuery(loginRoleQuery);
             //2.保存新的角色关联
-            for (UserRole userRole:userRoleList) {
-                userRole.setUrId(user.getUserId());
-                userRoleService.save(userRole);
+            for (LoginRole loginRole:loginRoleList) {
+                loginRole.setUrId(login.getUserId());
+                loginRoleService.save(loginRole);
             }
 
             return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
-            logger.info("修改用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
+            logger.info("修改登录用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
@@ -173,8 +174,8 @@ public class UserController {
     }
 
     /**
-     * 删除用户
-     * @param userId 用户ID
+     * 删除登录用户
+     * @param userId 登录用户ID
      * @return
      */
     @RequestMapping(value = "/delete",method = RequestMethod.POST, produces = {"text/html;charset=utf-8"})
@@ -185,7 +186,7 @@ public class UserController {
             BioAssert.notNull(userId, AuthorityErrorCode.USER_EMPTY_ERROR);
 
             //删除用户
-            userService.removeById(userId);
+            loginService.removeById(userId);
 
             return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
@@ -199,7 +200,7 @@ public class UserController {
     }
 
     /**
-     * 删除用户以及关联的角色
+     * 删除登录用户以及关联的角色
      * @param userId 用户ID
      * @return
      */
@@ -211,12 +212,12 @@ public class UserController {
             BioAssert.notNull(userId, AuthorityErrorCode.USER_EMPTY_ERROR);
 
             //删除用户
-            userService.removeById(userId);
+            loginService.removeById(userId);
 
             //删除原有的角色关联
-            UserRoleQuery userRoleQuery = new UserRoleQuery();
-            userRoleQuery.setUserId(userId);
-            userRoleService.removeByQuery(userRoleQuery);
+            LoginRoleQuery loginRoleQuery = new LoginRoleQuery();
+            loginRoleQuery.setUserId(userId);
+            loginRoleService.removeByQuery(loginRoleQuery);
 
             return AuthorityErrorCode.SUCCESS.toString();
         } catch (Exception e) {
@@ -230,23 +231,23 @@ public class UserController {
     }
 
     /**
-     * 查询用户
-     * @param userQuery 用户
+     * 查询登录用户
+     * @param loginQuery 登录用户
      * @return
      */
     @RequestMapping(value = "/list",method = RequestMethod.POST, produces = {"text/html;charset=utf-8"})
     @ResponseBody
-    public String listRoles(UserQuery userQuery){
+    public String list(LoginQuery loginQuery){
         try {
             //参数校验
-            BioAssert.notNull(userQuery, AuthorityErrorCode.USER_EMPTY_ERROR);
+            BioAssert.notNull(loginQuery, AuthorityErrorCode.USER_EMPTY_ERROR);
 
-            //查询用户
-            List<User> list = userService.queryList(userQuery);
+            //查询登录用户
+            List<Login> list = loginService.queryList(loginQuery);
 
             return list.toString();
         } catch (Exception e) {
-            logger.info("查询用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
+            logger.info("查询登录用户信息异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{
@@ -254,4 +255,33 @@ public class UserController {
             }
         }
     }
+
+    /**
+     * 获取手机验证码
+     * @param phoneNo 手机号码
+     * @return
+     */
+    @RequestMapping(value = "/getMobileVerificationCode",method = RequestMethod.POST, produces = {"text/html;charset=utf-8"})
+    @ResponseBody
+    public String getMobileVerificationCode(String phoneNo){
+        try {
+            //参数校验
+            BioAssert.hasText(phoneNo,AuthorityErrorCode.PHONENO_EMPTY_ERROR);
+
+            //验证码
+            String verificationCode = RandomStringUtils.randomNumeric(6);
+
+            //发送验证码短信
+
+            return verificationCode;
+        } catch (Exception e) {
+            logger.info("获取手机验证码异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
+            if(e instanceof BioException){
+                throw e;
+            }else{
+                throw new BioException(AuthorityErrorCode.FAIL);
+            }
+        }
+    }
+
 }

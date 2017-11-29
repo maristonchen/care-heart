@@ -1,18 +1,15 @@
-package com.biocare.authority.bean;
+package com.biocare.authority.query;
+
+import com.yhxd.tools.mybatis.query.BaseQuery;
 
 /**
- * 用户角色实体类
+ * 用户角色查询实体
  *
  * @author Quintic
  * @version 1.0
- * @since 2017/11/23 14:02
+ * @since 2017/11/23 14:08
  */
-public class UserRole {
-
-    /**
-     * 主键
-     */
-    private String urId;
+public class LoginRoleQuery extends BaseQuery{
 
     /**
      * 用户ID
@@ -23,14 +20,6 @@ public class UserRole {
      * 角色ID
      */
     private String roleId;
-
-    public String getUrId() {
-        return urId;
-    }
-
-    public void setUrId(String urId) {
-        this.urId = urId;
-    }
 
     public String getUserId() {
         return userId;

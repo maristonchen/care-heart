@@ -17,14 +17,9 @@ public class Login {
     private String userId;
 
     /**
-     * 手机号
-     */
-    private String phone;
-
-    /**
      * 用户名
      */
-    private String name;
+    private String username;
 
     /**
      * 密码
@@ -35,6 +30,11 @@ public class Login {
      * 盐
      */
     private String salt;
+
+    /**
+     * 登录状态
+     */
+    private Integer status;
 
     /**
      * 创建时间
@@ -51,20 +51,12 @@ public class Login {
         this.userId = userId;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -89,6 +81,14 @@ public class Login {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getCreateBy() {

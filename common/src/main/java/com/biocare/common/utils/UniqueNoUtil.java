@@ -17,13 +17,13 @@ public abstract class UniqueNoUtil {
      */
     public static final String T_TABLE_INFO = "TTAI";
 
-    public static final String T_USER_INFO = "TUSI";
+    public static final String T_LOGIN_INFO = "TLOI";
 
     public static final String T_ROLE_INFO = "TROI";
 
     public static final String T_RIGHT_INFO = "TRII";
 
-    public static final String T_USER_ROLE_INFO = "TURI";
+    public static final String T_LOGIN_ROLE_INFO = "TLRI";
 
     public static final String T_ROLE_RIGHT_INFO = "TRRI";
 
