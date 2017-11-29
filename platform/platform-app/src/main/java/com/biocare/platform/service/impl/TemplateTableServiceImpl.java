@@ -6,14 +6,18 @@ import com.biocare.platform.query.TemplateTablePageQuery;
 import com.biocare.platform.query.TemplateTableQuery;
 import com.biocare.platform.service.TemplateTableService;
 import com.yhxd.tools.mybatis.mapper.BaseMapper;
+import com.yhxd.tools.mybatis.query.BaseQuery;
 import com.yhxd.tools.mybatis.service.AbstractBaseService;
+import com.yhxd.tools.web.page.DTPage;
 import com.yhxd.tools.web.result.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.io.OutputStream;
+import java.util.List;
 
 
 /**
@@ -33,7 +37,7 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
     private TemplateTableMapper templateTableMapper;
 
     /**
-     * 获取角色权限业务Mapp
+     * 获取Mapper
      * @return
      */
     @Override
@@ -49,8 +53,37 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
      * @return
      */
     @Override
-    public JsonResult list(TemplateTablePageQuery pageQuery) {
-        return null;
+    public JsonResult queryDynamic(TemplateTablePageQuery pageQuery){
+        //根据vo构造query
+        TemplateTableQuery tableInfoQuery = new TemplateTableQuery();
+
+        BaseQuery.Criteria criteria = tableInfoQuery.createCriteria();
+        //表名称-模糊约束
+        if (!StringUtils.isEmpty(pageQuery.getTemplateString())){
+            criteria.andLike("tableName", pageQuery.getTemplateString());
+        }
+        //数量-精确约束
+        if (!StringUtils.isEmpty(pageQuery.getTemplateInt())){
+            criteria.andEqualTo("num",pageQuery.getTemplateInt());
+        }
+
+        //创建时间-范围约束
+        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMin())){
+            criteria.andGreaterThanOrEqualTo("createTime",pageQuery.getTemplateDateMin());
+        }
+        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMax())){
+            criteria.andLessThanOrEqualTo("createTime",pageQuery.getTemplateDateMax());
+        }
+        //分页
+        DTPage<TemplateTable> dtPage = new DTPage<TemplateTable>();
+        dtPage.setStart(pageQuery.getPage());
+        dtPage.setLength(pageQuery.getPageSize());
+
+        List<TemplateTable> templateTableList = queryList(tableInfoQuery);
+        dtPage.handler(templateTableList);
+        //查询总数
+        int count = queryCount(tableInfoQuery);
+        return new JsonResult(200, "获取列表数据成功",dtPage.getData(), count);
     }
 
     /**

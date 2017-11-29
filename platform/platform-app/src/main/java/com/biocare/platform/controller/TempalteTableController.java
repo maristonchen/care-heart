@@ -1,13 +1,20 @@
 package com.biocare.platform.controller;
 
+import com.biocare.common.utils.UniqueNoUtil;
+import com.biocare.platform.bean.TemplateTable;
+import com.biocare.platform.query.TemplateTablePageQuery;
 import com.biocare.platform.service.TemplateTableService;
 import com.yhxd.tools.web.result.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -25,14 +32,14 @@ public class TempalteTableController {
     private TemplateTableService templateTableService;
 
     /**
-     * 新增
+     * 新增(Selective)
      * @return
      */
-    @RequestMapping(value = "add")
+    @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult add(String paramJson){
-        System.out.println("request in");
-        System.out.println(templateTableService);
+    public JsonResult add(TemplateTable templateTable,HttpServletRequest request){
+        System.out.println(request.getParameter("templateString"));
+        templateTableService.saveSelective(templateTable);
         return new JsonResult(200,"新增成功");
     }
 
@@ -44,7 +51,7 @@ public class TempalteTableController {
     @RequestMapping(value = "delete")
     @ResponseBody
     public JsonResult delete(String id){
-        System.out.println("request in");
+        templateTableService.removeById(id);
         return new JsonResult(200,"删除成功");
     }
 
@@ -56,8 +63,8 @@ public class TempalteTableController {
      */
     @RequestMapping(value = "update")
     @ResponseBody
-    public JsonResult update(String paramJson){
-        System.out.println("request in");
+    public JsonResult update(TemplateTable templateTable){
+        templateTableService.modifyById(templateTable);
         return new JsonResult(200,"更新成功");
     }
 
@@ -66,10 +73,10 @@ public class TempalteTableController {
      * 列表(带分页)
      * @return
      */
-    @RequestMapping(value = "list")
+    @RequestMapping(value = "pageQuery")
     @ResponseBody
-    public JsonResult list(String paramJson){
-        System.out.println("request in");
+    public JsonResult list(TemplateTablePageQuery pageQuery){
+        templateTableService.queryDynamic(pageQuery);
         return new JsonResult(200,"分页查询成功","[我是数据]",1000);
     }
 

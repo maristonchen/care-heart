@@ -16,7 +16,7 @@
     </context:component-scan>
 
     <!-- 定义HandlerMapping,支持RequestMapping注解标记涵盖了HanlderMapping组件-->
-    <mvc:annotation-driven>
+    <mvc:annotation-driven conversion-service="customConversionService">
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <property name="defaultCharset" value="UTF-8"/>
@@ -80,6 +80,15 @@
             </bean>
         </property>
     </bean>
+
+    <bean id="customConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.biocare.platform.config.DateConverter"/>
+            </set>
+        </property>
+    </bean>
+
     <!-- 支持返回json -->
 
     <!-- 对模型视图添加前后缀 -->

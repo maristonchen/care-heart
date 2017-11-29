@@ -22,23 +22,28 @@ public interface TemplateTableService extends BaseService<TemplateTable,Template
      * @param pageQuery
      * @return
      */
-    public JsonResult list(TemplateTablePageQuery pageQuery);
+    /**
+     * 动态条件+分页查询
+     * @param tableInfoVo
+     * @return
+     */
+    JsonResult queryDynamic(TemplateTablePageQuery templateTablePageQuery);
 
     /**
      * 下载导入模板
      * @return
      */
-    public OutputStream downloadExcelTemplate();
+    OutputStream downloadExcelTemplate();
 
     /**
      * 导入excel
      * @return
      */
-    public boolean importExcel();
+    boolean importExcel();
 
     /**
      * 导出为excel
      * @return
      */
-    public OutputStream exportExcel();
+    OutputStream exportExcel();
 }
