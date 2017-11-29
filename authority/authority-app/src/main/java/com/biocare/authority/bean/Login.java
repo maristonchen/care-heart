@@ -41,6 +41,9 @@ public class Login {
      */
     private String createTime;
 
+    /**
+     * 创建人
+     */
     private String createBy;
 
     public String getUserId() {

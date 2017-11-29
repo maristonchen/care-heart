@@ -19,6 +19,8 @@ public abstract class UniqueNoUtil {
 
     public static final String T_LOGIN_INFO = "TLOI";
 
+    public static final String T_USER_INFO = "TUSI";
+
     public static final String T_ROLE_INFO = "TROI";
 
     public static final String T_RIGHT_INFO = "TRII";
