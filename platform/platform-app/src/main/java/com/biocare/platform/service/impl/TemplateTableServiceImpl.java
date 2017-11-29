@@ -68,12 +68,12 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
         }
 
         //创建时间-范围约束
-        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMin())){
-            criteria.andGreaterThanOrEqualTo("templateDate",pageQuery.getTemplateDateMin());
-        }
-        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMax())){
-            criteria.andLessThanOrEqualTo("templateDate",pageQuery.getTemplateDateMax());
-        }
+//        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMin())){
+//            criteria.andGreaterThanOrEqualTo("templateDate",pageQuery.getTemplateDateMin());
+//        }
+//        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMax())){
+//            criteria.andLessThanOrEqualTo("templateDate",pageQuery.getTemplateDateMax());
+//        }
         //分页
         DTPage<TemplateTable> dtPage = new DTPage<TemplateTable>();
         dtPage.setStart(pageQuery.getPage());
