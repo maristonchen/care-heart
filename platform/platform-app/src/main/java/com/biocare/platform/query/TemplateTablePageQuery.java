@@ -8,8 +8,8 @@ import java.util.Date;
  * @version 1.0
  */
 public class TemplateTablePageQuery {
-    int page;
-    int pageSize;
+    Integer page;
+    Integer pageSize;
 
     String templateString;
 
@@ -18,22 +18,23 @@ public class TemplateTablePageQuery {
     //模板-时间-结束
     Date templateDateMax;
 
-    int templateInt;
+    Integer templateInt;
 
 
-    public int getPage() {
+
+    public Integer getPage() {
         return page;
     }
 
-    public void setPage(int page) {
+    public void setPage(Integer page) {
         this.page = page;
     }
 
-    public int getPageSize() {
+    public Integer getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
 
@@ -61,11 +62,11 @@ public class TemplateTablePageQuery {
         this.templateDateMax = templateDateMax;
     }
 
-    public int getTemplateInt() {
+    public Integer getTemplateInt() {
         return templateInt;
     }
 
-    public void setTemplateInt(int templateInt) {
+    public void setTemplateInt(Integer templateInt) {
         this.templateInt = templateInt;
     }
 }

@@ -11,6 +11,7 @@ import java.util.Date;
  * @author Renhao
  * @version 1.0
  */
+
 public class TemplateTable implements Serializable{
 
     private static final long serialVersionUID = -8893494706131531685L;

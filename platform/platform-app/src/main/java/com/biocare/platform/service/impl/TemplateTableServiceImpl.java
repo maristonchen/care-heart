@@ -55,34 +55,34 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
     @Override
     public JsonResult queryDynamic(TemplateTablePageQuery pageQuery){
         //根据vo构造query
-        TemplateTableQuery tableInfoQuery = new TemplateTableQuery();
+        TemplateTableQuery templateTableQuery = new TemplateTableQuery();
 
-        BaseQuery.Criteria criteria = tableInfoQuery.createCriteria();
+        BaseQuery.Criteria criteria = templateTableQuery.createCriteria();
         //表名称-模糊约束
         if (!StringUtils.isEmpty(pageQuery.getTemplateString())){
-            criteria.andLike("tableName", pageQuery.getTemplateString());
+            criteria.andLike("templateString", pageQuery.getTemplateString());
         }
         //数量-精确约束
         if (!StringUtils.isEmpty(pageQuery.getTemplateInt())){
-            criteria.andEqualTo("num",pageQuery.getTemplateInt());
+            criteria.andEqualTo("templateInt",pageQuery.getTemplateInt());
         }
 
         //创建时间-范围约束
         if (!StringUtils.isEmpty(pageQuery.getTemplateDateMin())){
-            criteria.andGreaterThanOrEqualTo("createTime",pageQuery.getTemplateDateMin());
+            criteria.andGreaterThanOrEqualTo("templateDate",pageQuery.getTemplateDateMin());
         }
         if (!StringUtils.isEmpty(pageQuery.getTemplateDateMax())){
-            criteria.andLessThanOrEqualTo("createTime",pageQuery.getTemplateDateMax());
+            criteria.andLessThanOrEqualTo("templateDate",pageQuery.getTemplateDateMax());
         }
         //分页
         DTPage<TemplateTable> dtPage = new DTPage<TemplateTable>();
         dtPage.setStart(pageQuery.getPage());
         dtPage.setLength(pageQuery.getPageSize());
 
-        List<TemplateTable> templateTableList = queryList(tableInfoQuery);
+        List<TemplateTable> templateTableList = queryList(templateTableQuery);
         dtPage.handler(templateTableList);
         //查询总数
-        int count = queryCount(tableInfoQuery);
+        int count = queryCount(templateTableQuery);
         return new JsonResult(200, "获取列表数据成功",dtPage.getData(), count);
     }
 

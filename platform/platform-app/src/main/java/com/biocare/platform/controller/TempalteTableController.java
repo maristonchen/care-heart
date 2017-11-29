@@ -1,6 +1,5 @@
 package com.biocare.platform.controller;
 
-import com.biocare.common.utils.UniqueNoUtil;
 import com.biocare.platform.bean.TemplateTable;
 import com.biocare.platform.query.TemplateTablePageQuery;
 import com.biocare.platform.service.TemplateTableService;
@@ -8,12 +7,10 @@ import com.yhxd.tools.web.result.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -48,10 +45,10 @@ public class TempalteTableController {
      * 根据主键删除（注意关联删除）
      * @return
      */
-    @RequestMapping(value = "delete")
+    @RequestMapping(value = "delete",method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult delete(String id){
-        templateTableService.removeById(id);
+    public JsonResult delete(String templateId){
+        templateTableService.removeById(templateId);
         return new JsonResult(200,"删除成功");
     }
 
@@ -61,7 +58,7 @@ public class TempalteTableController {
      * 根据主键更新
      * @return
      */
-    @RequestMapping(value = "update")
+    @RequestMapping(value = "update",method = RequestMethod.POST)
     @ResponseBody
     public JsonResult update(TemplateTable templateTable){
         templateTableService.modifyById(templateTable);
@@ -73,11 +70,11 @@ public class TempalteTableController {
      * 列表(带分页)
      * @return
      */
-    @RequestMapping(value = "pageQuery")
+    @RequestMapping(value = "pageQuery",method = RequestMethod.POST)
     @ResponseBody
     public JsonResult list(TemplateTablePageQuery pageQuery){
-        templateTableService.queryDynamic(pageQuery);
-        return new JsonResult(200,"分页查询成功","[我是数据]",1000);
+        JsonResult jsonResult = templateTableService.queryDynamic(pageQuery);
+        return jsonResult;
     }
 
 
@@ -85,7 +82,7 @@ public class TempalteTableController {
      * 下载Excel导入模板
      * @return
      */
-    @RequestMapping(value = "downloadExcelTempate")
+    @RequestMapping(value = "downloadExcelTempate",method = RequestMethod.POST)
     @ResponseBody
     public JsonResult downloadExcelTempate(){
         System.out.println("request in");
@@ -97,7 +94,7 @@ public class TempalteTableController {
      * 导入Excel
      * @return
      */
-    @RequestMapping(value = "importExcel")
+    @RequestMapping(value = "importExcel",method = RequestMethod.POST)
     @ResponseBody
     public JsonResult importExcel(String paramJson){
         System.out.println("request in");
@@ -109,7 +106,7 @@ public class TempalteTableController {
      * 导出为Excel
      * @return
      */
-    @RequestMapping(value = "exportExcel")
+    @RequestMapping(value = "exportExcel",method = RequestMethod.POST)
     @ResponseBody
     public JsonResult exportExcel(String paramJson){
         System.out.println("request in");
