@@ -36,13 +36,4 @@ public class LoginServiceImpl extends AbstractBaseService<Login,LoginQuery> impl
         return this.loginMapper;
     }
 
-    /**
-     * 重写插入方法，设置自定义主键
-     * @param login 登录
-     */
-    @Override
-    public void save(Login login) {
-        login.setUserId(UniqueNoUtil.genNumber(UniqueNoUtil.T_LOGIN_INTO));
-        super.save(login);
-    }
 }

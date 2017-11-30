@@ -20,8 +20,8 @@ public enum AuthorityErrorCode implements ErrorCode {
     NAME_EMPTY_ERROR("010003","登录用户名为空！"),
     USER_EMPTY_ERROR("010004","用户信息为空！"),
     ROLE_EMPTY_ERROR("010005","角色信息为空！"),
-    RIGHT_EMPTY_ERROR("010006","权限信息为空！" )
-    ;
+    RIGHT_EMPTY_ERROR("010006","权限信息为空！" ),
+    PHONENO_EMPTY_ERROR("010007","手机号为空！" );
 
     /**
      * error code
