@@ -63,7 +63,7 @@ public class BannerServiceImpl extends AbstractBaseService<Banner, BannerQuery> 
         dtPage.setStart(0);
         dtPage.setLength(10);
 
-        List<Banner> bannerList = queryList(bannerQuery);
+        List<Banner> bannerList = queryList(bannerQuery,Banner.class);
         dtPage.handler(bannerList);
         //查询总数
         int count = queryCount(bannerQuery);

@@ -1,5 +1,7 @@
 package com.biocare.platform.bean;
 
+import com.alibaba.fastjson.JSON;
+
 import java.io.Serializable;
 
 /**
@@ -27,4 +29,33 @@ public class Banner implements Serializable {
      *  the url of the picture
      */
     private String picUrl;
+
+    public String getBannerId() {
+        return bannerId;
+    }
+
+    public void setBannerId(String bannerId) {
+        this.bannerId = bannerId;
+    }
+
+    public String getSystemId() {
+        return systemId;
+    }
+
+    public void setSystemId(String systemId) {
+        this.systemId = systemId;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
+    }
 }

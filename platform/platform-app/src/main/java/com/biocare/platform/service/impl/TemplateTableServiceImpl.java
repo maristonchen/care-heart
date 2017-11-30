@@ -79,7 +79,7 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
         dtPage.setStart(pageQuery.getPage());
         dtPage.setLength(pageQuery.getPageSize());
 
-        List<TemplateTable> templateTableList = queryList(templateTableQuery);
+        List<TemplateTable> templateTableList = queryList(templateTableQuery,TemplateTable.class);
         dtPage.handler(templateTableList);
         //查询总数
         int count = queryCount(templateTableQuery);
