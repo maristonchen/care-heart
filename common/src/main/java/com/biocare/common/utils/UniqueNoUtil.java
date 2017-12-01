@@ -35,6 +35,10 @@ public abstract class UniqueNoUtil {
 
     public static final String T_SYSTEM_INTO = "TSYI";
 
+    public static final String T_GROUP_RIGHT_INTO = "TGRI";
+
+    public static final String T_LOGIN_GROUP_INFO = "TLGI";
+
     /**
      * 生成主键编号
      *

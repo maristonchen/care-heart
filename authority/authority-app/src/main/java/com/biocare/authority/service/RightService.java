@@ -11,5 +11,5 @@ import com.yhxd.tools.mybatis.service.BaseService;
  * @version 1.0
  * @since 2017/11/22 14:49
  */
-public interface RightServcie extends BaseService<Right,RightQuery>{
+public interface RightService extends BaseService<Right,RightQuery>{
 }

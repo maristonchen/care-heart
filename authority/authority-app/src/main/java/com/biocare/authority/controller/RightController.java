@@ -3,7 +3,7 @@ package com.biocare.authority.controller;
 import com.biocare.authority.bean.Right;
 import com.biocare.authority.em.AuthorityErrorCode;
 import com.biocare.authority.query.RightQuery;
-import com.biocare.authority.service.RightServcie;
+import com.biocare.authority.service.RightService;
 import com.biocare.common.exception.BioException;
 import com.biocare.common.utils.BioAssert;
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ public class RightController {
      * 权限业务接口
      */
     @Resource
-    private RightServcie rightService;
+    private RightService rightService;
 
     /**
      * 插入权限

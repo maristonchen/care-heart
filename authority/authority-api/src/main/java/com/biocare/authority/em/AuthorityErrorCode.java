@@ -21,7 +21,10 @@ public enum AuthorityErrorCode implements ErrorCode {
     USER_EMPTY_ERROR("010004","用户信息为空！"),
     ROLE_EMPTY_ERROR("010005","角色信息为空！"),
     RIGHT_EMPTY_ERROR("010006","权限信息为空！" ),
-    PHONENO_EMPTY_ERROR("010007","手机号为空！" );
+    PHONENO_EMPTY_ERROR("010007","手机号为空！" ),
+    LOGIN_EMPTY_ERROR("010008","登录信息为空！" ),
+    USERNAME_PASSWORD_ERROR("010009","用户名或密码错误！" ),
+    LOGIN_SUCCESS("010010","登录成功！" );
 
     /**
      * error code

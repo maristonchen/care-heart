@@ -1,23 +1,25 @@
 package com.biocare.authority.bean;
 
+import com.alibaba.fastjson.JSON;
+
 /**
- * 角色权限实体类
+ * 用户组、权限关联实体
  *
  * @author Quintic
  * @version 1.0
- * @since 2017/11/23 14:05
+ * @since 2017/11/30 14:15
  */
-public class RoleRight {
+public class GroupRight {
 
     /**
      * 主键
      */
-    private String rrId;
+    private String grId;
 
     /**
-     * 角色ID
+     * 用户组ID
      */
-    private String roleId;
+    private String groupId;
 
     /**
      * 权限ID
@@ -29,20 +31,20 @@ public class RoleRight {
      */
     private String sysId;
 
-    public String getRrId() {
-        return rrId;
+    public String getGrId() {
+        return grId;
     }
 
-    public void setRrId(String rrId) {
-        this.rrId = rrId;
+    public void setGrId(String grId) {
+        this.grId = grId;
     }
 
-    public String getRoleId() {
-        return roleId;
+    public String getGroupId() {
+        return groupId;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 
     public String getRightId() {
@@ -59,5 +61,10 @@ public class RoleRight {
 
     public void setSysId(String sysId) {
         this.sysId = sysId;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }

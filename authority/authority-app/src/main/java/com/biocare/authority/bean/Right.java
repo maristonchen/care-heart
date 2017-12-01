@@ -46,6 +46,11 @@ public class Right {
      */
     private Integer status;
 
+    /**
+     * 子系统ID
+     */
+    private String sysId;
+
     public String getRightId() {
         return rightId;
     }
@@ -100,6 +105,14 @@ public class Right {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getSysId() {
+        return sysId;
+    }
+
+    public void setSysId(String sysId) {
+        this.sysId = sysId;
     }
 
     @Override
