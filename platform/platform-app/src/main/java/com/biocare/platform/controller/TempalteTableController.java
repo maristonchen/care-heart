@@ -90,9 +90,9 @@ public class TempalteTableController {
      * 下载Excel导入模板
      * @return
      */
-    @RequestMapping(value = "downloadExcelTempate",method = RequestMethod.GET)
+    @RequestMapping(value = "downloadExcelTemplate",method = RequestMethod.GET)
     @ResponseBody
-    public void downloadExcelTempate(HttpServletResponse resp) throws IOException {
+    public void downloadExcelTemplate(HttpServletResponse resp) throws IOException {
 
         XSSFWorkbook book = templateTableService.downloadExcelTemplate();
         resp = handleRespHeader(resp, "模板表导入模板");
@@ -110,7 +110,7 @@ public class TempalteTableController {
     @ResponseBody
     public JsonResult importExcel(MultipartFile excelFile) throws Exception {
         InputStream inputStream = excelFile.getInputStream();
-        return templateTableService.importExcel(inputStream);
+        return templateTableService.importExcel(excelFile);
     }
 
 
@@ -139,7 +139,7 @@ public class TempalteTableController {
         resp.addHeader("Content-type", " application/octet-stream");
         String fileNameAlias = new String((fileName).getBytes(), "ISO8859_1");
         resp.addHeader("Content-Disposition",
-                new StringBuffer().append("attachment;filename=").append(fileName+ DateFormatUtil.dateTimeLong(new Date())+".xlsx").toString());
+                new StringBuffer().append("attachment;filename=").append(fileNameAlias+ DateFormatUtil.dateTimeLong(new Date())+".xlsx").toString());
         return resp;
 
     }

@@ -7,6 +7,7 @@ import com.biocare.platform.query.TemplateTableQuery;
 import com.yhxd.tools.mybatis.service.BaseService;
 import com.yhxd.tools.web.result.JsonResult;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 
@@ -40,7 +41,7 @@ public interface TemplateTableService extends BaseService<TemplateTable,Template
      * 导入excel
      * @return
      */
-    JsonResult importExcel(InputStream excelInputStream) throws Exception;
+    JsonResult importExcel(MultipartFile excelFile) throws Exception;
 
     /**
      * 导出为excel

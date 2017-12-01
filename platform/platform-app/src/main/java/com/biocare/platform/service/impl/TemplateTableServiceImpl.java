@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.InputStream;
@@ -125,18 +126,18 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
      * @return
      */
     @Override
-    public JsonResult importExcel(InputStream excelInputStream) throws Exception {
+    public JsonResult importExcel(MultipartFile excelFile) throws Exception {
         int[] columnIndexs = {0,1,2,3};
         String[] colunmNames={"模板整数","模板小数","模板字符串","模板时间"};
         String[] attrNames={"templateInt","templateDouble","templateString","templateDate"};
         //检查第一行字段内容是否匹配
-        boolean isCorrect = ExcelUtil.checkImportExecl(excelInputStream, columnIndexs, colunmNames);
+        boolean isCorrect = ExcelUtil.checkImportExecl(excelFile.getInputStream(), columnIndexs, colunmNames);
         if (!isCorrect) {
             return new JsonResult(420, "导入文件数据字段不正确");
         }
 
         List<TemplateTable> templateTables =
-                ExcelUtil.loadListFromExecl(TemplateTable.class, excelInputStream,
+                ExcelUtil.loadListFromExecl(TemplateTable.class, excelFile.getInputStream(),
                         columnIndexs, attrNames, 1);
         for (TemplateTable templateTable : templateTables) {
             //检查数据库是否已经有相同数据并补充部分差异信息
