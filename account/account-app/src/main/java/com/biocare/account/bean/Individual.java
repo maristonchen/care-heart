@@ -1,11 +1,10 @@
 package com.biocare.account.bean;
 
 import com.alibaba.fastjson.JSON;
-
 import java.io.Serializable;
 
 /**
- * individual
+ * 个人信息
  *
  * @author mariston
  * @version 1.0
@@ -17,7 +16,7 @@ public class Individual implements Serializable {
     /**
      * 用户ID
      */
-    private String individualId;
+    private String userId;
 
     /**
      * 手机号
@@ -54,13 +53,17 @@ public class Individual implements Serializable {
      */
     private String birthday;
 
+    /**
+     * 类型 0：个人  1：医生  2：代理商（企业） 3：机构（医院）
+     */
+    private Integer type;
 
-    public String getIndividualId() {
-        return individualId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setIndividualId(String individualId) {
-        this.individualId = individualId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getPhone() {
