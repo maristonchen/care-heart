@@ -1,8 +1,11 @@
 package com.biocare.authority.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.biocare.authority.bean.Login;
 import com.biocare.authority.bean.LoginRole;
+import com.biocare.authority.dto.TreeMenuDTO;
 import com.biocare.authority.em.AuthorityErrorCode;
+import com.biocare.authority.handler.MenuHandler;
 import com.biocare.authority.query.LoginQuery;
 import com.biocare.authority.query.LoginRoleQuery;
 import com.biocare.authority.service.LoginService;
@@ -10,13 +13,14 @@ import com.biocare.authority.service.LoginRoleService;
 import com.biocare.common.exception.BioException;
 import com.biocare.common.utils.BioAssert;
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -47,6 +51,12 @@ public class LoginController {
      */
     @Resource
     private LoginRoleService loginRoleService;
+
+    /**
+     * 菜单业务Handler
+     */
+    @Resource
+    private MenuHandler menuHandler;
 
     /**
      * 插入登录用户
@@ -276,6 +286,64 @@ public class LoginController {
             return verificationCode;
         } catch (Exception e) {
             logger.info("获取手机验证码异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
+            if(e instanceof BioException){
+                throw e;
+            }else{
+                throw new BioException(AuthorityErrorCode.FAIL);
+            }
+        }
+    }
+
+    /**
+     * 登录
+     * @param login
+     * @return
+     */
+    @RequestMapping(value = "/login",method = RequestMethod.POST, produces = {"text/html;charset=utf-8"})
+    @ResponseBody
+    public String login(Login login){
+        try {
+            //参数校验
+            BioAssert.notNull(login,AuthorityErrorCode.LOGIN_EMPTY_ERROR);
+
+            //校验登录信息
+            LoginQuery loginQuery = new LoginQuery();
+            loginQuery.setUsername(login.getUsername());
+            List<Login> list=loginService.queryList(loginQuery);
+
+            if(!CollectionUtils.isEmpty(list)&&StringUtils.equals(login.getPassword(),list.get(0).getPassword())){
+                return AuthorityErrorCode.LOGIN_SUCCESS.toString();
+            }else{
+                return AuthorityErrorCode.USERNAME_PASSWORD_ERROR.toString();
+            }
+        } catch (Exception e) {
+            logger.info("登录异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
+            if(e instanceof BioException){
+                throw e;
+            }else{
+                throw new BioException(AuthorityErrorCode.FAIL);
+            }
+        }
+    }
+
+    /**
+     * 获取树形菜单
+     * @param username 用户名
+     * @return
+     */
+    @RequestMapping(value = "/getTreeMenu",method = RequestMethod.POST, produces = {"text/html;charset=utf-8"})
+    @ResponseBody
+    public String getTreeMenu(String username){
+        try {
+            //参数校验
+            BioAssert.hasText(username,AuthorityErrorCode.NAME_EMPTY_ERROR);
+
+            //获取树形菜单
+            List<TreeMenuDTO> treeMenu=menuHandler.getTreeMenu(username);
+
+            return JSON.toJSONString(treeMenu);
+        } catch (Exception e) {
+            logger.info("获取树形菜单异常：[{}]:{}", e.getStackTrace()[0], e.getMessage());
             if(e instanceof BioException){
                 throw e;
             }else{

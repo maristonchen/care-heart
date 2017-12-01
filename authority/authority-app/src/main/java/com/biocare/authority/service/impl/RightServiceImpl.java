@@ -3,7 +3,7 @@ package com.biocare.authority.service.impl;
 import com.biocare.authority.bean.Right;
 import com.biocare.authority.mapper.RightMapper;
 import com.biocare.authority.query.RightQuery;
-import com.biocare.authority.service.RightServcie;
+import com.biocare.authority.service.RightService;
 import com.biocare.common.utils.UniqueNoUtil;
 import com.yhxd.tools.mybatis.mapper.BaseMapper;
 import com.yhxd.tools.mybatis.service.AbstractBaseService;
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  * @since 2017/11/22 14:51
  */
 @Service("rightService")
-public class RightServiceImpl extends AbstractBaseService<Right,RightQuery> implements RightServcie {
+public class RightServiceImpl extends AbstractBaseService<Right,RightQuery> implements RightService {
 
     /**
      * 权限Mapper

@@ -52,9 +52,15 @@ public class TestRoleService {
     @Test
     public void testInsertRoleRight(){
         RoleRight roleRight=new RoleRight();
-        roleRight.setRoleId("TROI2017112811104544811503166456");
-        roleRight.setRightId("TRII2017112811102796669145314424");
+        roleRight.setRoleId("TROI2017120112345919938099717614");
+        roleRight.setRightId("TRII2017120113435502403972293652");
+        roleRight.setSysId("TSYI2017120112500261164339974467");
         roleRightService.save(roleRight);
+        RoleRight roleRight2=new RoleRight();
+        roleRight2.setRoleId("TROI2017120112345919938099717614");
+        roleRight2.setRightId("TRII2017120113435519735819607584");
+        roleRight2.setSysId("TSYI2017120112500261164339974467");
+        roleRightService.save(roleRight2);
         System.out.println("添加成功！");
     }
 

@@ -1,6 +1,7 @@
 package com.biocare.authority.handler;
 
-import com.biocare.authority.bean.Right;
+import com.biocare.authority.dto.TreeMenuDTO;
+
 import java.util.List;
 
 /**
@@ -13,8 +14,8 @@ import java.util.List;
 public interface MenuHandler {
 
     /**
-     * 查询用户拥有的权限
+     * 查询用户的树形菜单
      * @param userName 用户名
      */
-    List<Right> listRight(String userName);
+    List<TreeMenuDTO> getTreeMenu(String userName);
 }
