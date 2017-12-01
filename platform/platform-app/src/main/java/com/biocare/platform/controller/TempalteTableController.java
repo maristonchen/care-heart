@@ -3,7 +3,9 @@ package com.biocare.platform.controller;
 import com.biocare.platform.bean.TemplateTable;
 import com.biocare.platform.query.TemplateTablePageQuery;
 import com.biocare.platform.service.TemplateTableService;
+import com.yhxd.tools.base.date.DateFormatUtil;
 import com.yhxd.tools.web.result.JsonResult;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Date;
 
 
 /**
@@ -35,7 +44,6 @@ public class TempalteTableController {
     @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
     public JsonResult add(TemplateTable templateTable,HttpServletRequest request){
-        System.out.println(request.getParameter("templateString"));
         templateTableService.saveSelective(templateTable);
         return new JsonResult(200,"新增成功");
     }
@@ -82,11 +90,15 @@ public class TempalteTableController {
      * 下载Excel导入模板
      * @return
      */
-    @RequestMapping(value = "downloadExcelTempate",method = RequestMethod.POST)
+    @RequestMapping(value = "downloadExcelTempate",method = RequestMethod.GET)
     @ResponseBody
-    public JsonResult downloadExcelTempate(){
-        System.out.println("request in");
-        return new JsonResult(200,"Excel导入模板下载成功");
+    public void downloadExcelTempate(HttpServletResponse resp) throws IOException {
+
+        XSSFWorkbook book = templateTableService.downloadExcelTemplate();
+        resp = handleRespHeader(resp, "模板表导入模板");
+        ServletOutputStream outputStream = resp.getOutputStream();
+        book.write(outputStream);
+        outputStream.close();
     }
 
 
@@ -96,9 +108,9 @@ public class TempalteTableController {
      */
     @RequestMapping(value = "importExcel",method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult importExcel(String paramJson){
-        System.out.println("request in");
-        return new JsonResult(200,"Excel导入成功");
+    public JsonResult importExcel(MultipartFile excelFile) throws Exception {
+        InputStream inputStream = excelFile.getInputStream();
+        return templateTableService.importExcel(inputStream);
     }
 
 
@@ -106,14 +118,29 @@ public class TempalteTableController {
      * 导出为Excel
      * @return
      */
-    @RequestMapping(value = "exportExcel",method = RequestMethod.POST)
+    @RequestMapping(value = "exportExcel",method = RequestMethod.GET)
     @ResponseBody
-    public JsonResult exportExcel(String paramJson){
-        System.out.println("request in");
-        //实质是返回一个文件
-        return new JsonResult(200,"Excel导出成功");
+    public void exportExcel(TemplateTablePageQuery pageQuery, HttpServletResponse resp) throws IOException {
+        XSSFWorkbook book = templateTableService.exportExcel(pageQuery);
+        resp=handleRespHeader(resp,"模板表");
+        ServletOutputStream outputStream = resp.getOutputStream();
+        book.write(outputStream);
+        outputStream.close();
     }
 
+    /**
+     * 处理返回excel文件时的响应头
+     * @param resp
+     * @param fileName
+     * @return
+     */
+    private HttpServletResponse handleRespHeader(HttpServletResponse resp,String fileName) throws IOException {
+        resp.setCharacterEncoding("UTF-8");
+        resp.addHeader("Content-type", " application/octet-stream");
+        String fileNameAlias = new String((fileName).getBytes(), "ISO8859_1");
+        resp.addHeader("Content-Disposition",
+                new StringBuffer().append("attachment;filename=").append(fileName+ DateFormatUtil.dateTimeLong(new Date())+".xlsx").toString());
+        return resp;
 
-
+    }
 }

@@ -1,5 +1,6 @@
 package com.biocare.platform.service.impl;
 
+import com.biocare.common.utils.ExcelUtil;
 import com.biocare.platform.bean.TemplateTable;
 import com.biocare.platform.mapper.TemplateTableMapper;
 import com.biocare.platform.query.TemplateTablePageQuery;
@@ -10,14 +11,19 @@ import com.yhxd.tools.mybatis.query.BaseQuery;
 import com.yhxd.tools.mybatis.service.AbstractBaseService;
 import com.yhxd.tools.web.page.DTPage;
 import com.yhxd.tools.web.result.JsonResult;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.io.OutputStream;
+import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -68,12 +74,12 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
         }
 
         //创建时间-范围约束
-//        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMin())){
-//            criteria.andGreaterThanOrEqualTo("templateDate",pageQuery.getTemplateDateMin());
-//        }
-//        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMax())){
-//            criteria.andLessThanOrEqualTo("templateDate",pageQuery.getTemplateDateMax());
-//        }
+        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMin())){
+            criteria.andGreaterThanOrEqualTo("templateDate",pageQuery.getTemplateDateMin());
+        }
+        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMax())){
+            criteria.andLessThanOrEqualTo("templateDate",pageQuery.getTemplateDateMax());
+        }
         //分页
         DTPage<TemplateTable> dtPage = new DTPage<TemplateTable>();
         dtPage.setStart(pageQuery.getPage());
@@ -91,8 +97,27 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
      * @return
      */
     @Override
-    public OutputStream downloadExcelTemplate() {
-        return null;
+    public XSSFWorkbook downloadExcelTemplate() {
+        TemplateTable templateTable = new TemplateTable();
+        templateTable.setTemplateId(UUID.randomUUID().toString().substring(10));
+        templateTable.setTemplateInt(((int)(Math.random()*1000)));
+        templateTable.setTemplateDouble(Math.random());
+        templateTable.setTemplateString("字符串");
+        templateTable.setTemplateDate(new Date());
+
+        String[] colunmNames={"模板整数","模板小数","模板字符串","模板时间"};
+        String[] attrNames={"templateInt","templateDouble","templateString","templateDate"};
+
+        XSSFWorkbook book = new XSSFWorkbook();
+        XSSFSheet sheet = book.createSheet("模板表导入模板");
+
+        for (int i = 0; i < 50; i++) {
+            sheet.setColumnWidth(i, 6000);
+        }
+        ExcelUtil.appendRowToSheetWithColor(sheet, colunmNames,true, IndexedColors.YELLOW.getIndex());
+        ExcelUtil.appendRowObjectToSheetSelective(sheet,templateTable,attrNames);
+
+        return book;
     }
 
     /**
@@ -100,8 +125,29 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
      * @return
      */
     @Override
-    public boolean importExcel() {
-        return false;
+    public JsonResult importExcel(InputStream excelInputStream) throws Exception {
+        int[] columnIndexs = {0,1,2,3};
+        String[] colunmNames={"模板整数","模板小数","模板字符串","模板时间"};
+        String[] attrNames={"templateInt","templateDouble","templateString","templateDate"};
+        //检查第一行字段内容是否匹配
+        boolean isCorrect = ExcelUtil.checkImportExecl(excelInputStream, columnIndexs, colunmNames);
+        if (!isCorrect) {
+            return new JsonResult(420, "导入文件数据字段不正确");
+        }
+
+        List<TemplateTable> templateTables =
+                ExcelUtil.loadListFromExecl(TemplateTable.class, excelInputStream,
+                        columnIndexs, attrNames, 1);
+        for (TemplateTable templateTable : templateTables) {
+            //检查数据库是否已经有相同数据并补充部分差异信息
+            //List<TemplateTable> result = templateTableService.queryByExample(templateTable);
+            //if (result == null || result.size() < 1) {
+            // 同时还要检查条目完整性，暂略
+            // 补充信息
+            saveSelective(templateTable);
+            //}
+        }
+        return new JsonResult(200,"Excel导入成功");
     }
 
     /**
@@ -109,7 +155,29 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
      * @return
      */
     @Override
-    public OutputStream exportExcel() {
-        return null;
+    public XSSFWorkbook exportExcel(TemplateTablePageQuery pageQuery) {
+        //根据约束条件查询出需要导出的数据
+        List<TemplateTable> templateTables = (List<TemplateTable>) (queryDynamic(pageQuery).getData());
+
+        String[] colunmNames={"模板ID","模板整数","模板小数","模板字符串","模板时间"};
+        String[] attrNames={"templateId","templateInt","templateDouble","templateString","templateDate"};
+
+        XSSFWorkbook book = new XSSFWorkbook();
+        XSSFSheet sheet = book.createSheet("模板列表导出");
+
+        for (int i = 0; i < 50; i++) {
+            sheet.setColumnWidth(i, 6000);
+        }
+        ExcelUtil.appendRowToSheetWithColor(sheet, colunmNames,true,IndexedColors.YELLOW.getIndex());
+
+        for (TemplateTable templateTable : templateTables) {
+            try {
+                ExcelUtil.appendRowObjectToSheetSelective(sheet,templateTable,attrNames);
+            } catch (Exception e) {
+                e.printStackTrace();
+                continue;
+            }
+        }
+        return book;
     }
 }

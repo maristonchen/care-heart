@@ -6,8 +6,9 @@ import com.biocare.platform.query.TemplateTablePageQuery;
 import com.biocare.platform.query.TemplateTableQuery;
 import com.yhxd.tools.mybatis.service.BaseService;
 import com.yhxd.tools.web.result.JsonResult;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.OutputStream;
+import java.io.InputStream;
 
 
 /**
@@ -24,7 +25,7 @@ public interface TemplateTableService extends BaseService<TemplateTable,Template
      */
     /**
      * 动态条件+分页查询
-     * @param tableInfoVo
+     * @param templateTablePageQuery
      * @return
      */
     JsonResult queryDynamic(TemplateTablePageQuery templateTablePageQuery);
@@ -33,17 +34,17 @@ public interface TemplateTableService extends BaseService<TemplateTable,Template
      * 下载导入模板
      * @return
      */
-    OutputStream downloadExcelTemplate();
+    XSSFWorkbook downloadExcelTemplate();
 
     /**
      * 导入excel
      * @return
      */
-    boolean importExcel();
+    JsonResult importExcel(InputStream excelInputStream) throws Exception;
 
     /**
      * 导出为excel
      * @return
      */
-    OutputStream exportExcel();
+    XSSFWorkbook exportExcel(TemplateTablePageQuery pageQuery);
 }
