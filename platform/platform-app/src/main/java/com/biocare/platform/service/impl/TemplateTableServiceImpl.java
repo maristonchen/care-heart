@@ -21,7 +21,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -29,13 +28,14 @@ import java.util.UUID;
 
 /**
  * 模板-业务实现类
+ *
  * @author Renhao
  * @version 1.0
  */
 @Service
-public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,TemplateTableQuery> implements TemplateTableService {
+public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable, TemplateTableQuery> implements TemplateTableService {
     //用来记录业务日志
-    Logger logger= LoggerFactory.getLogger(TemplateTableServiceImpl.class);
+    Logger logger = LoggerFactory.getLogger(TemplateTableServiceImpl.class);
 
     /**
      * 模板-Mapper
@@ -45,6 +45,7 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
 
     /**
      * 获取Mapper
+     *
      * @return
      */
     @Override
@@ -53,61 +54,62 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
     }
 
 
-
     /**
      * 分页动态条件查询（列表展示用）
+     *
      * @param pageQuery
      * @return
      */
     @Override
-    public JsonResult queryDynamic(TemplateTablePageQuery pageQuery){
+    public JsonResult queryDynamic(TemplateTablePageQuery pageQuery) {
         //根据vo构造query
         TemplateTableQuery templateTableQuery = new TemplateTableQuery();
 
         BaseQuery.Criteria criteria = templateTableQuery.createCriteria();
         //表名称-模糊约束
-        if (!StringUtils.isEmpty(pageQuery.getTemplateString())){
+        if (!StringUtils.isEmpty(pageQuery.getTemplateString())) {
             criteria.andLike("templateString", pageQuery.getTemplateString());
         }
         //数量-精确约束
-        if (!StringUtils.isEmpty(pageQuery.getTemplateInt())){
-            criteria.andEqualTo("templateInt",pageQuery.getTemplateInt());
+        if (!StringUtils.isEmpty(pageQuery.getTemplateInt())) {
+            criteria.andEqualTo("templateInt", pageQuery.getTemplateInt());
         }
 
         //创建时间-范围约束
-        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMin())){
-            criteria.andGreaterThanOrEqualTo("templateDate",pageQuery.getTemplateDateMin());
+        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMin())) {
+            criteria.andGreaterThanOrEqualTo("templateDate", pageQuery.getTemplateDateMin());
         }
-        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMax())){
-            criteria.andLessThanOrEqualTo("templateDate",pageQuery.getTemplateDateMax());
+        if (!StringUtils.isEmpty(pageQuery.getTemplateDateMax())) {
+            criteria.andLessThanOrEqualTo("templateDate", pageQuery.getTemplateDateMax());
         }
         //分页
         DTPage<TemplateTable> dtPage = new DTPage<TemplateTable>();
         dtPage.setStart(pageQuery.getPage());
         dtPage.setLength(pageQuery.getPageSize());
 
-        List<TemplateTable> templateTableList = queryList(templateTableQuery,TemplateTable.class);
+        List<TemplateTable> templateTableList = queryList(templateTableQuery, TemplateTable.class);
         dtPage.handler(templateTableList);
         //查询总数
         int count = queryCount(templateTableQuery);
-        return new JsonResult(200, "获取列表数据成功",dtPage.getData(), count);
+        return new JsonResult(200, "获取列表数据成功", dtPage.getData(), count);
     }
 
     /**
      * 下载导入模板
+     *
      * @return
      */
     @Override
     public XSSFWorkbook downloadExcelTemplate() {
         TemplateTable templateTable = new TemplateTable();
         templateTable.setTemplateId(UUID.randomUUID().toString().substring(10));
-        templateTable.setTemplateInt(((int)(Math.random()*1000)));
+        templateTable.setTemplateInt(((int) (Math.random() * 1000)));
         templateTable.setTemplateDouble(Math.random());
         templateTable.setTemplateString("字符串");
         templateTable.setTemplateDate(new Date());
 
-        String[] colunmNames={"模板整数","模板小数","模板字符串","模板时间"};
-        String[] attrNames={"templateInt","templateDouble","templateString","templateDate"};
+        String[] colunmNames = {"模板整数", "模板小数", "模板字符串", "模板时间"};
+        String[] attrNames = {"templateInt", "templateDouble", "templateString", "templateDate"};
 
         XSSFWorkbook book = new XSSFWorkbook();
         XSSFSheet sheet = book.createSheet("模板表导入模板");
@@ -115,21 +117,22 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
         for (int i = 0; i < 50; i++) {
             sheet.setColumnWidth(i, 6000);
         }
-        ExcelUtil.appendRowToSheetWithColor(sheet, colunmNames,true, IndexedColors.YELLOW.getIndex());
-        ExcelUtil.appendRowObjectToSheetSelective(sheet,templateTable,attrNames);
+        ExcelUtil.appendRowToSheetWithColor(sheet, colunmNames, true, IndexedColors.YELLOW.getIndex());
+        ExcelUtil.appendRowObjectToSheetSelective(sheet, templateTable, attrNames);
 
         return book;
     }
 
     /**
      * 导入excel
+     *
      * @return
      */
     @Override
     public JsonResult importExcel(MultipartFile excelFile) throws Exception {
-        int[] columnIndexs = {0,1,2,3};
-        String[] colunmNames={"模板整数","模板小数","模板字符串","模板时间"};
-        String[] attrNames={"templateInt","templateDouble","templateString","templateDate"};
+        int[] columnIndexs = {0, 1, 2, 3};
+        String[] colunmNames = {"模板整数", "模板小数", "模板字符串", "模板时间"};
+        String[] attrNames = {"templateInt", "templateDouble", "templateString", "templateDate"};
         //检查第一行字段内容是否匹配
         boolean isCorrect = ExcelUtil.checkImportExecl(excelFile.getInputStream(), columnIndexs, colunmNames);
         if (!isCorrect) {
@@ -148,11 +151,12 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
             saveSelective(templateTable);
             //}
         }
-        return new JsonResult(200,"Excel导入成功");
+        return new JsonResult(200, "Excel导入成功");
     }
 
     /**
      * 导出为excel
+     *
      * @return
      */
     @Override
@@ -160,8 +164,8 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
         //根据约束条件查询出需要导出的数据
         List<TemplateTable> templateTables = (List<TemplateTable>) (queryDynamic(pageQuery).getData());
 
-        String[] colunmNames={"模板ID","模板整数","模板小数","模板字符串","模板时间"};
-        String[] attrNames={"templateId","templateInt","templateDouble","templateString","templateDate"};
+        String[] colunmNames = {"模板ID", "模板整数", "模板小数", "模板字符串", "模板时间"};
+        String[] attrNames = {"templateId", "templateInt", "templateDouble", "templateString", "templateDate"};
 
         XSSFWorkbook book = new XSSFWorkbook();
         XSSFSheet sheet = book.createSheet("模板列表导出");
@@ -169,11 +173,11 @@ public class TemplateTableServiceImpl extends AbstractBaseService<TemplateTable,
         for (int i = 0; i < 50; i++) {
             sheet.setColumnWidth(i, 6000);
         }
-        ExcelUtil.appendRowToSheetWithColor(sheet, colunmNames,true,IndexedColors.YELLOW.getIndex());
+        ExcelUtil.appendRowToSheetWithColor(sheet, colunmNames, true, IndexedColors.YELLOW.getIndex());
 
         for (TemplateTable templateTable : templateTables) {
             try {
-                ExcelUtil.appendRowObjectToSheetSelective(sheet,templateTable,attrNames);
+                ExcelUtil.appendRowObjectToSheetSelective(sheet, templateTable, attrNames);
             } catch (Exception e) {
                 e.printStackTrace();
                 continue;
