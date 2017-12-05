@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.UUID;
 
 
 /**
@@ -44,6 +45,7 @@ public class TempalteTableController {
     @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
     public JsonResult add(TemplateTable templateTable,HttpServletRequest request){
+        templateTable.setTemplateId(UUID.randomUUID().toString().replace("-",""));
         templateTableService.saveSelective(templateTable);
         return new JsonResult(200,"新增成功");
     }
@@ -143,4 +145,5 @@ public class TempalteTableController {
         return resp;
 
     }
+
 }
